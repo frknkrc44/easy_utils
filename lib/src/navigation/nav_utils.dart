@@ -45,7 +45,14 @@ class EasyNav {
   }
 
   /// Pop routes until it's the first one.
-  static void popUntilFirst() => _navigatorState.popUntil((r) => r.isFirst);
+  static void popUntilFirst() => popUntil((r) => r.isFirst);
+
+  /// Pop all routes (<b>use it carefully</b>).
+  static void popAll() => popUntil((r) => false);
+
+  /// Pop routes until the condition returns true.
+  static void popUntil(bool Function(Route) predicate) =>
+      _navigatorState.popUntil(predicate);
 
   /// Push a route.
   static Future<T?> push<T>(
