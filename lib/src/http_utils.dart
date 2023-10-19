@@ -307,10 +307,10 @@ class EasyHttp {
       sendBodyAsForm: sendBodyAsForm,
     );
 
-    var stramBytes = await streamedResponse.stream.toBytes();
+    var streamBytes = await streamedResponse.stream.toBytes();
 
     return _http.Response(
-      (encoding ?? utf8).decode(stramBytes),
+      (encoding ?? utf8).decode(streamBytes),
       streamedResponse.statusCode,
       request: streamedResponse.request,
       headers: streamedResponse.headers,

@@ -17,27 +17,38 @@
 
 part of easy_utils;
 
+/// Use the Navigator without context.
+/// ```dart
+/// EasyNav.push(MyPage());
+/// ```
 class EasyNav {
   EasyNav._();
 
   static var navigatorKey = GlobalKey<NavigatorState>();
   static var materialAppKey = GlobalKey<State<MaterialApp>>();
   static var cupertinoAppKey = GlobalKey<State<CupertinoApp>>();
-  static get _navigatorState => navigatorKey.currentState!;
-  static get _navigatorContext => navigatorKey.currentContext!;
+  static NavigatorState get _navigatorState => navigatorKey.currentState!;
+  static BuildContext get _navigatorContext => navigatorKey.currentContext!;
 
   static const _notConnectedStateError =
       'Not connected to the MaterialApp/CupertinoApp state. Use "key: EasyNav.materialAppKey" for the MaterialApp or use "key: EasyNav.cupertinoAppKey" for the CupertinoApp to connect.';
   static const _notConnectedNavError =
       'Not connected to the MaterialApp/CupertinoApp navigator. Use "navigatorKey: EasyNav.navigatorKey" to connect.';
 
-  static void pop([dynamic result]) {
+  /// Pop the current screen if canPop() returned true.
+  ///
+  /// You can send a result to receive from the back state.
+  static void pop<T>([T? result]) {
     if (_navigatorState.canPop()) {
-      _navigatorState.pop(result);
+      return _navigatorState.pop<T>(result);
     }
   }
 
-  static Future<void> push(
+  /// Pop routes until it's the first one.
+  static void popUntilFirst() => _navigatorState.popUntil((r) => r.isFirst);
+
+  /// Push a route.
+  static Future<T?> push<T>(
     Widget screen, {
     PageRouteType? routeType,
     String? routeName,
@@ -45,8 +56,8 @@ class EasyNav {
   }) {
     assert(_navigatorState.mounted, _notConnectedNavError);
 
-    return _navigatorState.push(
-      _getPageRoute(
+    return _navigatorState.push<T>(
+      _getPageRoute<T>(
         screen,
         routeType,
         routeName: routeName,
@@ -55,13 +66,14 @@ class EasyNav {
     );
   }
 
-  static Future<void> replace(
+  /// Push a route and remove other ones.
+  static Future<T?> replace<T>(
     Widget screen, {
     PageRouteType? routeType,
     String? routeName,
     dynamic arguments,
   }) =>
-      replaceUntil(
+      replaceUntil<T>(
         screen,
         routeType: routeType,
         routeName: routeName,
@@ -69,7 +81,8 @@ class EasyNav {
         predicate: (r) => false,
       );
 
-  static Future<void> replaceUntil(
+  /// Push a route and remove other ones until the condition returns true.
+  static Future<T?> replaceUntil<T>(
     Widget screen, {
     PageRouteType? routeType,
     String? routeName,
@@ -78,8 +91,8 @@ class EasyNav {
   }) {
     assert(_navigatorState.mounted, _notConnectedNavError);
 
-    return _navigatorState.pushAndRemoveUntil(
-      _getPageRoute(
+    return _navigatorState.pushAndRemoveUntil<T>(
+      _getPageRoute<T>(
         screen,
         routeType,
         routeName: routeName,
@@ -89,37 +102,40 @@ class EasyNav {
     );
   }
 
-  static Future<void> pushNamed(
+  /// Push a named route.
+  static Future<T?> pushNamed<T>(
     String routeName, {
     PageRouteType? routeType,
     dynamic arguments,
   }) =>
-      push(
+      push<T>(
         _getRouteWidget(routeName),
         routeType: routeType,
         routeName: routeName,
         arguments: arguments,
       );
 
-  static Future<void> replaceNamed(
+  /// Push a named route and remove other ones.
+  static Future<T?> replaceNamed<T>(
     String routeName, {
     PageRouteType? routeType,
     dynamic arguments,
   }) =>
-      replaceNamedUntil(
+      replaceNamedUntil<T>(
         routeName,
         routeType: routeType,
         arguments: arguments,
         predicate: (r) => false,
       );
 
-  static Future<void> replaceNamedUntil(
+  /// Push a named route and remove other ones until the condition returns true.
+  static Future<T?> replaceNamedUntil<T>(
     String routeName, {
     PageRouteType? routeType,
     dynamic arguments,
     required bool Function(Route) predicate,
   }) =>
-      replaceUntil(
+      replaceUntil<T>(
         _getRouteWidget(routeName),
         routeType: routeType,
         routeName: routeName,
@@ -127,6 +143,7 @@ class EasyNav {
         predicate: predicate,
       );
 
+  /// Get a route widget from a MaterialApp/CupertinoApp.
   static Widget _getRouteWidget(String name) {
     var routes = _getRoutes();
 
@@ -138,6 +155,7 @@ class EasyNav {
     return routes![name]!(_navigatorContext);
   }
 
+  /// Get routes list from a MaterialApp/CupertinoApp.
   static Map<String, Widget Function(BuildContext)>? _getRoutes() {
     assert(_navigatorState.mounted, _notConnectedNavError);
 
@@ -152,7 +170,8 @@ class EasyNav {
     throw AssertionError(_notConnectedStateError);
   }
 
-  static PageRoute _getPageRoute(
+  /// Get the page route with a transition effect.
+  static PageRoute<T> _getPageRoute<T>(
     Widget screen,
     PageRouteType? routeType, {
     String? routeName,
@@ -160,7 +179,7 @@ class EasyNav {
   }) {
     switch (routeType) {
       case PageRouteType.MATERIAL:
-        return MaterialPageRoute(
+        return MaterialPageRoute<T>(
           builder: (_) => screen,
           settings: RouteSettings(
             name: routeName,
@@ -168,7 +187,7 @@ class EasyNav {
           ),
         );
       case PageRouteType.CUPERTINO:
-        return CupertinoPageRoute(
+        return CupertinoPageRoute<T>(
           builder: (_) => screen,
           settings: RouteSettings(
             name: routeName,
@@ -177,7 +196,7 @@ class EasyNav {
         );
       case PageRouteType.FADE:
       case PageRouteType.SLIDE:
-        return _CustomPageRoute(
+        return _CustomPageRoute<T>(
           screen,
           routeType: routeType!,
           routeName: routeName,
@@ -188,7 +207,7 @@ class EasyNav {
             ? PageRouteType.MATERIAL
             : PageRouteType.CUPERTINO;
 
-        return _getPageRoute(
+        return _getPageRoute<T>(
           screen,
           type,
           routeName: routeName,
@@ -206,7 +225,7 @@ class EasyNav {
             ? PageRouteType.MATERIAL
             : PageRouteType.CUPERTINO;
 
-        return _getPageRoute(
+        return _getPageRoute<T>(
           screen,
           type,
           routeName: routeName,
