@@ -30,8 +30,10 @@ class EasyNav {
   static final navigatorKey = GlobalKey<NavigatorState>();
   static final materialAppKey = GlobalKey<State<MaterialApp>>();
   static final cupertinoAppKey = GlobalKey<State<CupertinoApp>>();
-  static NavigatorState get state => navigatorKey.currentState!;
+
   static BuildContext get context => navigatorKey.currentContext!;
+  static NavigatorState get state => navigatorKey.currentState!;
+  static OverlayState get overlay => state.overlay!;
 
   static const _notConnectedStateError =
       'Not connected to the MaterialApp/CupertinoApp state. Use "key: EasyNav.materialAppKey" for the MaterialApp or use "key: EasyNav.cupertinoAppKey" for the CupertinoApp to connect.';
