@@ -27,12 +27,22 @@ class EasyNav {
   /// Override the DEFAULT_APP type to whatever you want.
   static PageRouteType? overriddenDefaultRouteType;
 
+  /// Required Navigator key for the MaterialApp/CupertinoApp.
   static final navigatorKey = GlobalKey<NavigatorState>();
+
+  /// Required key for the MaterialApp.
   static final materialAppKey = GlobalKey<State<MaterialApp>>();
+
+  /// Required key for the CupertinoApp.
   static final cupertinoAppKey = GlobalKey<State<CupertinoApp>>();
 
+  /// Returns BuildContext from the Navigator.
   static BuildContext get context => navigatorKey.currentContext!;
+
+  /// Returns state from the Navigator.
   static NavigatorState get state => navigatorKey.currentState!;
+
+  /// Returns OverlayState from the Navigator.
   static OverlayState get overlay => state.overlay!;
 
   static const _notConnectedStateError =

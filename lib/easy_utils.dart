@@ -26,6 +26,7 @@ import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as _http;
 
-part 'src/http_utils.dart';
 part 'src/navigation/nav_utils.dart';
-part 'src/navigation/page_route.dart';
+part 'src/navigation/custom_page_route.dart';
+part 'src/navigation/page_route_type.dart';
+part 'src/network/http_utils.dart';
