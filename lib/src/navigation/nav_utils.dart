@@ -24,11 +24,13 @@ part of easy_utils;
 class EasyNav {
   EasyNav._();
 
-  static var navigatorKey = GlobalKey<NavigatorState>();
-  static var materialAppKey = GlobalKey<State<MaterialApp>>();
-  static var cupertinoAppKey = GlobalKey<State<CupertinoApp>>();
-  static NavigatorState get _navigatorState => navigatorKey.currentState!;
-  static BuildContext get _navigatorContext => navigatorKey.currentContext!;
+  static PageRouteType? overriddenRouteType = PageRouteType.DEFAULT_APP;
+
+  static final navigatorKey = GlobalKey<NavigatorState>();
+  static final materialAppKey = GlobalKey<State<MaterialApp>>();
+  static final cupertinoAppKey = GlobalKey<State<CupertinoApp>>();
+  static NavigatorState get state => navigatorKey.currentState!;
+  static BuildContext get context => navigatorKey.currentContext!;
 
   static const _notConnectedStateError =
       'Not connected to the MaterialApp/CupertinoApp state. Use "key: EasyNav.materialAppKey" for the MaterialApp or use "key: EasyNav.cupertinoAppKey" for the CupertinoApp to connect.';
@@ -39,8 +41,8 @@ class EasyNav {
   ///
   /// You can send a result to receive from the back state.
   static void pop<T>([T? result]) {
-    if (_navigatorState.canPop()) {
-      return _navigatorState.pop<T>(result);
+    if (state.canPop()) {
+      return state.pop<T>(result);
     }
   }
 
@@ -52,7 +54,7 @@ class EasyNav {
 
   /// Pop routes until the condition returns true.
   static void popUntil(bool Function(Route) predicate) =>
-      _navigatorState.popUntil(predicate);
+      state.popUntil(predicate);
 
   /// Push a route.
   static Future<T?> push<T>(
@@ -61,9 +63,9 @@ class EasyNav {
     String? routeName,
     dynamic arguments,
   }) {
-    assert(_navigatorState.mounted, _notConnectedNavError);
+    assert(state.mounted, _notConnectedNavError);
 
-    return _navigatorState.push<T>(
+    return state.push<T>(
       _getPageRoute<T>(
         screen,
         routeType,
@@ -96,9 +98,9 @@ class EasyNav {
     dynamic arguments,
     required bool Function(Route) predicate,
   }) {
-    assert(_navigatorState.mounted, _notConnectedNavError);
+    assert(state.mounted, _notConnectedNavError);
 
-    return _navigatorState.pushAndRemoveUntil<T>(
+    return state.pushAndRemoveUntil<T>(
       _getPageRoute<T>(
         screen,
         routeType,
@@ -159,12 +161,12 @@ class EasyNav {
       'Route "$name" is not found in the routes list.',
     );
 
-    return routes![name]!(_navigatorContext);
+    return routes![name]!(context);
   }
 
   /// Get routes list from a MaterialApp/CupertinoApp.
   static Map<String, Widget Function(BuildContext)>? _getRoutes() {
-    assert(_navigatorState.mounted, _notConnectedNavError);
+    assert(state.mounted, _notConnectedNavError);
 
     if (materialAppKey.currentWidget != null) {
       return (materialAppKey.currentWidget as MaterialApp).routes;
@@ -184,6 +186,8 @@ class EasyNav {
     String? routeName,
     dynamic arguments,
   }) {
+    routeType ??= overriddenRouteType;
+
     switch (routeType) {
       case PageRouteType.MATERIAL:
         return MaterialPageRoute<T>(
