@@ -24,7 +24,8 @@ part of easy_utils;
 class EasyNav {
   EasyNav._();
 
-  static PageRouteType? overriddenRouteType = PageRouteType.DEFAULT_APP;
+  /// Override the DEFAULT_APP type to whatever you want.
+  static PageRouteType? overriddenDefaultRouteType;
 
   static final navigatorKey = GlobalKey<NavigatorState>();
   static final materialAppKey = GlobalKey<State<MaterialApp>>();
@@ -186,7 +187,7 @@ class EasyNav {
     String? routeName,
     dynamic arguments,
   }) {
-    routeType ??= overriddenRouteType;
+    routeType ??= overriddenDefaultRouteType;
 
     switch (routeType) {
       case PageRouteType.MATERIAL:
