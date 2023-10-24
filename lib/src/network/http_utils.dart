@@ -349,12 +349,32 @@ class EasyHttp {
     customRequest.encoding = encoding ?? utf8;
 
     if (headers?.isNotEmpty ?? false) {
-      customRequest.headers.addAll(headers!);
+      customRequest.headers.addAll(
+        headers!.map(
+          // convert content-type to Content-Type
+          (key, value) {
+            var newKeyArr = key.split('-');
+
+            for (int i = 0; i < newKeyArr.length; i++) {
+              var item = newKeyArr[i];
+              newKeyArr[i] =
+                  item[0].toUpperCase() + item.substring(1).toLowerCase();
+            }
+
+            return MapEntry(newKeyArr.join('-'), value);
+          },
+        ),
+      );
     }
 
     if (body != null) {
       if (body is Map) {
         if (sendBodyAsForm && body is Map<String, String>) {
+          // remove the content type key to prevent errors
+          if (customRequest.headers.containsKey('Content-Type')) {
+            customRequest.headers.remove('Content-Type');
+          }
+
           customRequest.bodyFields = body;
         } else {
           customRequest.body = jsonEncode(body);
