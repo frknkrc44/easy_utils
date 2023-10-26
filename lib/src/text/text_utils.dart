@@ -1,6 +1,16 @@
 part of easy_utils;
 
 extension EasyString on String {
+  bool startsWithMultiple(List<String> substrings) {
+    for (int i = 0; i < substrings.length; i++) {
+      if (startsWith(substrings[i])) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   // https://stackoverflow.com/a/54180384
   bool equalsIgnoreCase(String? other) {
     return toLowerCase() == other?.toLowerCase();
