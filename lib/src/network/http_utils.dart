@@ -75,6 +75,7 @@ part of easy_utils;
 ///
 /// Don't forget to allow the clear text traffic if you're using the HTTP communication instead of HTTPS.
 class EasyHttp {
+  /// Constructor of EasyHttp
   EasyHttp._();
 
   static EasyHttp? _instance;

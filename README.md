@@ -146,3 +146,31 @@ if (EasyUtils.isAndroid) {
 ```
 
 For more details, check the `src/platform` folder.
+
+## EasyDisplay
+
+Check the display features with or without a BuildContext.
+
+### Usage
+
+Example: Check the physical display width
+
+```dart
+EasyDisplay.physicalWidth;
+```
+
+Example: Check the platform brightness by using a BuildContext
+
+```dart
+EasyDisplay.create(context).platformBrightness;
+```
+
+Example: Check for the dark mode enabled by using the EasyNav's appContext
+
+```dart
+if (EasyDisplay.createFromAppContext().isDark) {
+  debugPrint('Dark mode');
+}
+```
+
+For more details, check the `src/display/display_utils.dart` file.

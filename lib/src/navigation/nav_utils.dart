@@ -22,10 +22,6 @@ part of easy_utils;
 /// ```dart
 /// EasyNav.push(MyPage());
 /// ```
-///
-/// <b>NOTE:</b> The default `PageRouteType.DEFAULT_APP` page route type requires the materialAppKey/cupertinoAppKey be added in your app configuration.
-///
-/// If you don't want to add an app key, don't use named routes and override the `overriddenDefaultRouteType` to another value.
 class EasyNav {
   EasyNav._();
 
@@ -35,14 +31,27 @@ class EasyNav {
   /// Required Navigator key for the MaterialApp/CupertinoApp.
   static final navigatorKey = GlobalKey<NavigatorState>();
 
-  /// Required key for the MaterialApp (used for named routes and `PageRouteType.DEFAULT_APP`).
+  /// Required key for the MaterialApp (used for named routes, `appContext` and `PageRouteType.DEFAULT_APP`).
   static final materialAppKey = GlobalKey<State<MaterialApp>>();
 
-  /// Required key for the CupertinoApp (used for named routes and`PageRouteType.DEFAULT_APP`).
+  /// Required key for the CupertinoApp (used for named routes, `appContext` and`PageRouteType.DEFAULT_APP`).
   static final cupertinoAppKey = GlobalKey<State<CupertinoApp>>();
 
   /// Returns BuildContext from the Navigator.
   static BuildContext get context => navigatorKey.currentContext!;
+
+  /// Returns BuildContext from the app state.
+  ///
+  /// <b>NOTE:</b> Make sure you added the materialAppKey/cupertinoAppKey to the app.
+  static BuildContext? get appContext {
+    assert(
+      materialAppKey.currentContext != null ||
+          cupertinoAppKey.currentContext != null,
+      _notConnectedStateError,
+    );
+
+    return materialAppKey.currentContext ?? cupertinoAppKey.currentContext;
+  }
 
   /// Returns state from the Navigator.
   static NavigatorState get state => navigatorKey.currentState!;

@@ -1,3 +1,8 @@
+## 0.0.7
+
+* Fix minor documentation issue
+* Add display related functions
+
 ## 0.0.6
 
 * Add more documentation

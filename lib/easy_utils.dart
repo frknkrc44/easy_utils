@@ -19,6 +19,8 @@
 library easy_utils;
 
 import 'dart:convert';
+import 'dart:math';
+import 'dart:ui';
 
 import 'src/platform/platform_utils.dart';
 
@@ -29,6 +31,7 @@ import 'package:http/http.dart' as _http;
 
 export 'src/platform/platform_utils.dart';
 
+part 'src/display/display_utils.dart';
 part 'src/navigation/nav_utils.dart';
 part 'src/navigation/custom_page_route.dart';
 part 'src/navigation/page_route_type.dart';
