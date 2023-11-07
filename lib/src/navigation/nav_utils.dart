@@ -227,9 +227,7 @@ class EasyNav {
           arguments: arguments,
         );
       case PageRouteType.DEFAULT_OS:
-        var type = kIsWeb || !(Platform.isIOS || Platform.isMacOS)
-            ? PageRouteType.MATERIAL
-            : PageRouteType.CUPERTINO;
+        var type = isApple ? PageRouteType.CUPERTINO : PageRouteType.MATERIAL;
 
         return _getPageRoute<T>(
           screen,

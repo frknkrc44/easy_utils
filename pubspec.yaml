@@ -1,6 +1,6 @@
 name: easy_utils
-description: Navigator and HTTP utils for Flutter.
-version: 0.0.2
+description: Some utilities to make your Flutter experience easier and better.
+version: 0.0.3
 homepage: https://github.com/frknkrc44/easy_utils
 
 environment:
