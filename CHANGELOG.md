@@ -1,3 +1,7 @@
+## 0.0.6
+
+* Add more documentation
+
 ## 0.0.5
 
 * Fix license header

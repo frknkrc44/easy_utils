@@ -1,5 +1,6 @@
 part of easy_utils;
 
+/// Some string extensions
 extension EasyString on String {
   /// Check 'starts with' for multiple conditions
   bool startsWithMultiple(List<String> substrings) {

@@ -78,9 +78,15 @@ class EasyHttp {
   EasyHttp._();
 
   static EasyHttp? _instance;
+
+  /// Get the EasyHttp instance
   static EasyHttp get instance => _instance ??= EasyHttp._();
 
   var _client = _http.Client();
+
+  /// Set a prefix to use it on your API calls.
+  ///
+  /// You can set it as `null` to cancel it.
   String? prefix;
 
   /// Send a GET request

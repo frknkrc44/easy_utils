@@ -18,22 +18,27 @@
 part of easy_utils;
 
 /// Use the Navigator without context.
+///
 /// ```dart
 /// EasyNav.push(MyPage());
 /// ```
+///
+/// <b>NOTE:</b> The default `PageRouteType.DEFAULT_APP` page route type requires the materialAppKey/cupertinoAppKey be added in your app configuration.
+///
+/// If you don't want to add an app key, don't use named routes and override the `overriddenDefaultRouteType` to another value.
 class EasyNav {
   EasyNav._();
 
-  /// Override the DEFAULT_APP type to whatever you want.
+  /// Override the default DEFAULT_APP type to whatever you want.
   static PageRouteType? overriddenDefaultRouteType;
 
   /// Required Navigator key for the MaterialApp/CupertinoApp.
   static final navigatorKey = GlobalKey<NavigatorState>();
 
-  /// Required key for the MaterialApp.
+  /// Required key for the MaterialApp (used for named routes and `PageRouteType.DEFAULT_APP`).
   static final materialAppKey = GlobalKey<State<MaterialApp>>();
 
-  /// Required key for the CupertinoApp.
+  /// Required key for the CupertinoApp (used for named routes and`PageRouteType.DEFAULT_APP`).
   static final cupertinoAppKey = GlobalKey<State<CupertinoApp>>();
 
   /// Returns BuildContext from the Navigator.
@@ -45,8 +50,11 @@ class EasyNav {
   /// Returns OverlayState from the Navigator.
   static OverlayState get overlay => state.overlay!;
 
+  /// The constant error message when the app key is not added to an app.
   static const _notConnectedStateError =
       'Not connected to the MaterialApp/CupertinoApp state. Use "key: EasyNav.materialAppKey" for the MaterialApp or use "key: EasyNav.cupertinoAppKey" for the CupertinoApp to connect.';
+
+  /// The constant error message when the Navigator key is not added to an app.
   static const _notConnectedNavError =
       'Not connected to the MaterialApp/CupertinoApp navigator. Use "navigatorKey: EasyNav.navigatorKey" to connect.';
 
@@ -181,14 +189,17 @@ class EasyNav {
   static Map<String, Widget Function(BuildContext)>? _getRoutes() {
     assert(state.mounted, _notConnectedNavError);
 
+    // If the MaterialApp connection found, return routes list.
     if (materialAppKey.currentWidget != null) {
       return (materialAppKey.currentWidget as MaterialApp).routes;
     }
 
+    // If the CupertinoApp connection found, return routes list.
     if (cupertinoAppKey.currentWidget != null) {
       return (cupertinoAppKey.currentWidget as CupertinoApp).routes;
     }
 
+    // Otherwise it throws an exception.
     throw AssertionError(_notConnectedStateError);
   }
 
@@ -199,6 +210,9 @@ class EasyNav {
     String? routeName,
     dynamic arguments,
   }) {
+    // If no custom route type defined,
+    // use the overridden route type
+    // or the default one.
     routeType ??= overriddenDefaultRouteType;
 
     switch (routeType) {
@@ -227,6 +241,8 @@ class EasyNav {
           arguments: arguments,
         );
       case PageRouteType.DEFAULT_OS:
+        // Check for the current OS is iOS/macOS or not
+        // Then select a possible page route type for the current OS
         var type = isApple ? PageRouteType.CUPERTINO : PageRouteType.MATERIAL;
 
         return _getPageRoute<T>(
@@ -243,6 +259,8 @@ class EasyNav {
           _notConnectedStateError,
         );
 
+        // Check the app uses MaterialApp or not
+        // Then select a possible page route type for the current app configuration
         var type = materialAppKey.currentWidget != null
             ? PageRouteType.MATERIAL
             : PageRouteType.CUPERTINO;

@@ -17,6 +17,15 @@
 
 part of easy_utils;
 
+/// This enum using in the EasyNav to determine page route type
+///
+/// Parameters:
+/// - `DEFAULT_APP`: Select the transition effect from the current app configuration (default)
+/// - `DEFAULT_OS`: Select the transition effect for the current OS
+/// - `MATERIAL`: Force the Material transition effect
+/// - `CUPERTINO`: Force the Cupertino transition effect
+/// - `FADE`: Use a custom fade transition effect
+/// - `SLIDE`: Use a custom slide transition effect
 enum PageRouteType {
   /// Use the best one for the current app configuration (default)
   /// MaterialApp: Material transition
