@@ -1,10 +1,13 @@
 # Easy_Utils
 A Flutter package which contains some helpful tools.
 
+Just run `flutter pub add easy_utils` to add in your project.
+
 ## Features
 - Send HTTP requests simply (uses http library as dependency).
 - Manage the app navigation without context requirement.
 - Some string extensions to make your development better.
+- Check the current platform even you're compiling the same code for the Web platform.
 
 ## EasyNav
 

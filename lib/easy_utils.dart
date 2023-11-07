@@ -15,6 +15,7 @@
  *   along with easy_utils.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+/// Some utilities to make your Flutter experience easier and better.
 library easy_utils;
 
 import 'dart:convert';

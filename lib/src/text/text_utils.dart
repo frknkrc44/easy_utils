@@ -1,6 +1,7 @@
 part of easy_utils;
 
 extension EasyString on String {
+  /// Check 'starts with' for multiple conditions
   bool startsWithMultiple(List<String> substrings) {
     for (int i = 0; i < substrings.length; i++) {
       if (startsWith(substrings[i])) {
@@ -11,11 +12,21 @@ extension EasyString on String {
     return false;
   }
 
-  // https://stackoverflow.com/a/54180384
+  /// Check equality of other String but ignoring the case
   bool equalsIgnoreCase(String? other) {
+    // https://stackoverflow.com/a/54180384
     return toLowerCase() == other?.toLowerCase();
   }
 
+  /// Returns indexes of a char
+  ///
+  /// Warning: Do not use separators with multiple characters
+  ///
+  /// Example:
+  /// ```dart
+  /// var myStr = 'hello,from,dart';
+  /// var indexes = myStr.indexesOf(',');
+  /// ```
   List<int> indexesOf(String char) {
     assert(char.length == 1);
 
@@ -34,6 +45,9 @@ extension EasyString on String {
     return out;
   }
 
+  /// Returns a String list which contains parts of this String seperated by a seperator
+  ///
+  /// Warning: Do not use separators with multiple characters
   List<String> splitExtended(String sep, [int? index]) {
     var indexes = indexesOf(sep);
 
