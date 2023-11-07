@@ -15,21 +15,23 @@
  *   along with easy_utils.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-library easy_utils;
+/// Whether the operating system is a version of Android.
+bool get isAndroid => false;
 
-import 'dart:convert';
+/// Whether the operating system is a version of Fuchsia.
+bool get isFuchsia => false;
 
-import 'src/platform/platform_utils.dart';
+/// Whether the operating system is a version of iOS.
+bool get isIOS => false;
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+/// Whether the operating system is a version of Linux.
+bool get isLinux => false;
 
-import 'package:http/http.dart' as _http;
+/// Whether the operating system is a version of macOS.
+bool get isMacOS => false;
 
-export 'src/platform/platform_utils.dart';
+/// Whether the operating system is a version of Windows.
+bool get isWindows => false;
 
-part 'src/navigation/nav_utils.dart';
-part 'src/navigation/custom_page_route.dart';
-part 'src/navigation/page_route_type.dart';
-part 'src/network/http_utils.dart';
-part 'src/text/text_utils.dart';
+/// Whether the environment is Web.
+bool get isWeb => true;

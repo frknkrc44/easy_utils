@@ -119,3 +119,27 @@ EasyHttp.instance.sendCUSTOM(
 ```
 
 For more details, check the `src/network/http_utils.dart` file.
+
+## platform_utils
+
+Check the running OS with a compatible way for the Web platform.
+
+### Usage
+
+Example: Check for the Android OS
+
+```dart
+...
+
+// import the library
+import 'package:easy_utils/platform_utils.dart' as PlatformUtils;
+
+if (PlatformUtils.isAndroid) {
+  // it will run when the device have the Android OS
+  debugPrint('Hello from Android!');
+}
+
+...
+```
+
+For more details, check the `src/platform` folder.

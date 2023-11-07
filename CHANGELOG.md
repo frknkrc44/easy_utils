@@ -1,3 +1,7 @@
+## 0.0.4
+
+* Rename compat to platform and add new options
+
 ## 0.0.3
 
 * Fix the web support and the description

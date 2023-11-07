@@ -15,4 +15,18 @@
  *   along with easy_utils.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-bool get isApple => false;
+import 'dart_html.dart' if (dart.library.io) 'dart_io.dart';
+
+export 'dart_html.dart' if (dart.library.io) 'dart_io.dart';
+
+/// Whether the operating system is a version of iOS or macOS.
+bool get isApple => isIOS || isMacOS;
+
+/// Whether the operating system is a version of Android or Fuchsia.
+bool get isGoogle => isAndroid || isFuchsia;
+
+/// Whether the operating system is a version of Linux, macOS or Windows.
+bool get isDesktop => isLinux || isMacOS || isWindows;
+
+/// Whether the operating system is a version of Android or iOS.
+bool get isMobile => isAndroid || isIOS;
