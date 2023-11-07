@@ -135,9 +135,9 @@ Example: Check for the Android OS
 ...
 
 // import the library
-import 'package:easy_utils/platform_utils.dart' as PlatformUtils;
+import 'package:easy_utils/easy_utils.dart' as EasyUtils;
 
-if (PlatformUtils.isAndroid) {
+if (EasyUtils.isAndroid) {
   // it will run when the device have the Android OS
   debugPrint('Hello from Android!');
 }
