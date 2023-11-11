@@ -1,3 +1,8 @@
+## 0.1.0
+
+* BREAKING CHANGE: EasyNav.materialAppKey and EasyNav.cupertinoAppKey replaced with EasyNav.appKey
+* Fix minor license issue
+
 ## 0.0.7
 
 * Fix minor documentation issue

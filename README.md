@@ -6,8 +6,8 @@ Just run `flutter pub add easy_utils` to add in your project.
 ## Features
 - Send HTTP requests simply (uses http library as dependency).
 - Manage the app navigation without context requirement.
-- Some string extensions to make your development better.
 - Check the current platform even you're compiling the same code for the Web platform.
+- And more...
 
 ## EasyNav
 
@@ -15,7 +15,7 @@ Just run `flutter pub add easy_utils` to add in your project.
 
 #### MaterialApp
 
-Add EasyNav.navigatorKey and EasyNav.materialAppKey to your MaterialApp instance.
+Add EasyNav.navigatorKey and EasyNav.appKey to your MaterialApp instance.
 
 ```dart
   ...
@@ -23,7 +23,7 @@ Add EasyNav.navigatorKey and EasyNav.materialAppKey to your MaterialApp instance
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      key: EasyNav.materialAppKey,
+      key: EasyNav.appKey,
       navigatorKey: EasyNav.navigatorKey,
 
   ...
@@ -31,7 +31,7 @@ Add EasyNav.navigatorKey and EasyNav.materialAppKey to your MaterialApp instance
 
 #### CupertinoApp
 
-Add EasyNav.navigatorKey and EasyNav.cupertinoAppKey to your CupertinoApp instance.
+Add EasyNav.navigatorKey and EasyNav.appKey to your CupertinoApp instance.
 
 ```dart
   ...
@@ -39,7 +39,7 @@ Add EasyNav.navigatorKey and EasyNav.cupertinoAppKey to your CupertinoApp instan
   @override
   Widget build(BuildContext context) {
     return CupertinoApp(
-      key: EasyNav.cupertinoAppKey,
+      key: EasyNav.appKey,
       navigatorKey: EasyNav.navigatorKey,
 
   ...

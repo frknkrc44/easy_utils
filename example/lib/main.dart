@@ -9,7 +9,7 @@ class MyMaterialApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      key: EasyNav.materialAppKey,
+      key: EasyNav.appKey,
       navigatorKey: EasyNav.navigatorKey,
       debugShowCheckedModeBanner: false,
       title: 'Flutter Easy Utils Demo',
@@ -29,7 +29,7 @@ class MaterialHomePage extends StatelessWidget {
         appBar: AppBar(
           centerTitle: false,
           title: Text(
-            (EasyNav.materialAppKey.currentWidget as MaterialApp).title,
+            (EasyNav.appKey.currentWidget as MaterialApp).title,
           ),
         ),
         body: SingleChildScrollView(

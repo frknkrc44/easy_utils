@@ -31,26 +31,22 @@ class EasyNav {
   /// Required Navigator key for the MaterialApp/CupertinoApp.
   static final navigatorKey = GlobalKey<NavigatorState>();
 
-  /// Required key for the MaterialApp (used for named routes, `appContext` and `PageRouteType.DEFAULT_APP`).
-  static final materialAppKey = GlobalKey<State<MaterialApp>>();
-
-  /// Required key for the CupertinoApp (used for named routes, `appContext` and`PageRouteType.DEFAULT_APP`).
-  static final cupertinoAppKey = GlobalKey<State<CupertinoApp>>();
+  /// Required key for the MaterialApp/CupertinoApp (used for named routes, `appContext` and `PageRouteType.DEFAULT_APP`).
+  static final appKey = GlobalKey<State>();
 
   /// Returns BuildContext from the Navigator.
   static BuildContext get context => navigatorKey.currentContext!;
 
   /// Returns BuildContext from the app state.
   ///
-  /// <b>NOTE:</b> Make sure you added the materialAppKey/cupertinoAppKey to the app.
+  /// <b>NOTE:</b> Make sure you added the appKey to the app.
   static BuildContext? get appContext {
     assert(
-      materialAppKey.currentContext != null ||
-          cupertinoAppKey.currentContext != null,
+      _isAppKeyValid,
       _notConnectedStateError,
     );
 
-    return materialAppKey.currentContext ?? cupertinoAppKey.currentContext;
+    return appKey.currentContext;
   }
 
   /// Returns state from the Navigator.
@@ -61,11 +57,11 @@ class EasyNav {
 
   /// The constant error message when the app key is not added to an app.
   static const _notConnectedStateError =
-      'Not connected to the MaterialApp/CupertinoApp state. Use "key: EasyNav.materialAppKey" for the MaterialApp or use "key: EasyNav.cupertinoAppKey" for the CupertinoApp to connect.';
+      'Not connected to the MaterialApp/CupertinoApp state. Add "key: EasyNav.appKey" to connect.';
 
   /// The constant error message when the Navigator key is not added to an app.
   static const _notConnectedNavError =
-      'Not connected to the MaterialApp/CupertinoApp navigator. Use "navigatorKey: EasyNav.navigatorKey" to connect.';
+      'Not connected to the MaterialApp/CupertinoApp navigator. Add "navigatorKey: EasyNav.navigatorKey" to connect.';
 
   /// Pop the current screen if canPop() returned true.
   ///
@@ -199,18 +195,23 @@ class EasyNav {
     assert(state.mounted, _notConnectedNavError);
 
     // If the MaterialApp connection found, return routes list.
-    if (materialAppKey.currentWidget != null) {
-      return (materialAppKey.currentWidget as MaterialApp).routes;
+    if (appKey.currentWidget is MaterialApp) {
+      return (appKey.currentWidget as MaterialApp).routes;
     }
 
     // If the CupertinoApp connection found, return routes list.
-    if (cupertinoAppKey.currentWidget != null) {
-      return (cupertinoAppKey.currentWidget as CupertinoApp).routes;
+    if (appKey.currentWidget is CupertinoApp) {
+      return (appKey.currentWidget as CupertinoApp).routes;
     }
 
     // Otherwise it throws an exception.
     throw AssertionError(_notConnectedStateError);
   }
+
+  /// Whether the app key is implemented to app
+  static bool get _isAppKeyValid =>
+      appKey.currentWidget is MaterialApp ||
+      appKey.currentWidget is CupertinoApp;
 
   /// Get the page route with a transition effect.
   static PageRoute<T> _getPageRoute<T>(
@@ -263,14 +264,13 @@ class EasyNav {
       case PageRouteType.DEFAULT_APP:
       default:
         assert(
-          materialAppKey.currentWidget != null ||
-              cupertinoAppKey.currentWidget != null,
+          _isAppKeyValid,
           _notConnectedStateError,
         );
 
         // Check the app uses MaterialApp or not
         // Then select a possible page route type for the current app configuration
-        var type = materialAppKey.currentWidget != null
+        var type = appKey.currentWidget is MaterialApp
             ? PageRouteType.MATERIAL
             : PageRouteType.CUPERTINO;
 
