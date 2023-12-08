@@ -297,7 +297,7 @@ class EasyHttp {
   /// Send a custom HTTP request (like UNLOCK)
   Future<_http.Response> sendCUSTOM(
     String url, {
-    String method = 'GET',
+    required String method,
     Map<String, String>? headers,
     Object? body,
     Encoding? encoding,
@@ -330,7 +330,7 @@ class EasyHttp {
   /// Send a custom HTTP request (like UNLOCK) as streamed
   Future<_http.StreamedResponse> sendCUSTOMStreamed(
     String url, {
-    String method = 'GET',
+    required String method,
     Map<String, String>? headers,
     Object? body,
     Encoding? encoding,
