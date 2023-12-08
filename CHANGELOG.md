@@ -1,3 +1,7 @@
+## 0.1.2+1
+
+* Fix typo
+
 ## 0.1.2
 
 * Make method parameter is required for sendCUSTOM/sendCUSTOMStreamed
