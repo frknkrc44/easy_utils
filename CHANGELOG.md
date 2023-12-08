@@ -1,3 +1,7 @@
+## 0.1.2
+
+* Make method parameter is required for sendCUSTOM/sendCUSTOMStreamed
+
 ## 0.1.1
 
 * Try to fix Navigator errors
