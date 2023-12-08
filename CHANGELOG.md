@@ -1,3 +1,7 @@
+## 0.1.1
+
+* Try to fix Navigator errors
+
 ## 0.1.0
 
 * BREAKING CHANGE: EasyNav.materialAppKey and EasyNav.cupertinoAppKey replaced with EasyNav.appKey

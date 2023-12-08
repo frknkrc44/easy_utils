@@ -91,12 +91,15 @@ class EasyNav {
   }) {
     assert(state.mounted, _notConnectedNavError);
 
-    return state.push<T>(
-      _getPageRoute<T>(
-        screen,
-        routeType,
-        routeName: routeName,
-        arguments: arguments,
+    return Future.delayed(
+      Duration.zero,
+      () => state.push<T>(
+        _getPageRoute<T>(
+          screen,
+          routeType,
+          routeName: routeName,
+          arguments: arguments,
+        ),
       ),
     );
   }
@@ -126,14 +129,17 @@ class EasyNav {
   }) {
     assert(state.mounted, _notConnectedNavError);
 
-    return state.pushAndRemoveUntil<T>(
-      _getPageRoute<T>(
-        screen,
-        routeType,
-        routeName: routeName,
-        arguments: arguments,
+    return Future.delayed(
+      Duration.zero,
+      () => state.pushAndRemoveUntil<T>(
+        _getPageRoute<T>(
+          screen,
+          routeType,
+          routeName: routeName,
+          arguments: arguments,
+        ),
+        predicate,
       ),
-      predicate,
     );
   }
 
