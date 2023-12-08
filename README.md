@@ -1,4 +1,6 @@
-# Easy_Utils
+[![pub package](https://img.shields.io/pub/v/easy_utils.svg)](https://pub.dev/packages/easy_utils)
+[![package publisher](https://img.shields.io/pub/publisher/easy_utils.svg)](https://pub.dev/packages/easy_utils/publisher)
+
 A Flutter package which contains some helpful tools.
 
 Just run `flutter pub add easy_utils` to add in your project.
