@@ -1,5 +1,17 @@
 name: Package analyzer
-on: [push, pull_request]
+on:
+  push:
+    branches:
+    - main
+  pull_request:
+    branches:
+    - main
+  branch_protection_rule:
+    types: [created, completed]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
 
 jobs:
   package-analysis:
