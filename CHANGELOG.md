@@ -1,3 +1,7 @@
+## 0.1.3
+
+* Add JSON response extension for http.Response
+
 ## 0.1.2+1
 
 * Fix typo

@@ -15,26 +15,17 @@
  *   along with easy_utils.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-/// Some utilities to make your Flutter experience easier and better.
-library easy_utils;
+part of easy_utils;
 
-import 'dart:convert';
-import 'dart:math';
-import 'dart:ui';
+/// The JSON response extension for the HTTP library
+extension JSONResponse on _http.Response {
+  /// Converts the body content to `List` / `Map`
+  dynamic get bodyJson => jsonDecode(body);
 
-import 'src/platform/platform_utils.dart';
+  /// Converts the body content to `List<T>`
+  List<T> getBodyList<T>() => (bodyJson as List<dynamic>).cast<T>();
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-
-import 'package:http/http.dart' as _http;
-
-export 'src/platform/platform_utils.dart';
-
-part 'src/display/display_utils.dart';
-part 'src/navigation/nav_utils.dart';
-part 'src/navigation/custom_page_route.dart';
-part 'src/navigation/page_route_type.dart';
-part 'src/network/http_utils.dart';
-part 'src/network/json_response.dart';
-part 'src/text/text_utils.dart';
+  /// Converts the body content to `Map<String, T>`
+  Map<String, T> getBodyMap<T>() =>
+      (bodyJson as Map<String, dynamic>).cast<String, T>();
+}
