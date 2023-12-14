@@ -18,6 +18,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: axel-op/dart-package-analyzer@v3
+      - name: analyze-stable
+        uses: flutterings/dart-package-analyzer@v1
         with:
-          githubToken: ${{ github.token }}
+          flutter_version: '3.16.4'
+          flutter_channel: 'stable'
