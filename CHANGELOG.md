@@ -1,6 +1,6 @@
 ## 0.1.5
 
-* Add 'getCurrentRouteName' function to EasyNav
+* Add 'getCurrentRouteName' and 'getCurrentRouteArguments' functions to EasyNav
 
 ## 0.1.4
 

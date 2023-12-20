@@ -17,7 +17,7 @@ Just run `flutter pub add easy_utils` to add in your project.
 
 #### MaterialApp
 
-Add EasyNav.navigatorKey and EasyNav.appKey to your MaterialApp instance.
+Add EasyNav.appKey and EasyNav.navigatorKey to your MaterialApp instance.
 
 ```dart
   ...
@@ -33,7 +33,7 @@ Add EasyNav.navigatorKey and EasyNav.appKey to your MaterialApp instance.
 
 #### CupertinoApp
 
-Add EasyNav.navigatorKey and EasyNav.appKey to your CupertinoApp instance.
+Add EasyNav.appKey and EasyNav.navigatorKey to your CupertinoApp instance.
 
 ```dart
   ...
@@ -65,7 +65,7 @@ EasyNav.pushNamed(
 )
 ```
 
-Example: Get the route name even it's invisible
+Example: Get the current route name even it's invisible
 ```dart
 // You need to pass the BuildContext to get `realName`
 var routeName = EasyNav.getCurrentRouteName(context);

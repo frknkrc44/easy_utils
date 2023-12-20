@@ -250,6 +250,19 @@ class EasyNav {
     return settings?.name ?? '/';
   }
 
+  /// Get the current route arguments
+  static dynamic getCurrentRouteArguments([BuildContext? context]) {
+    RouteSettings? settings;
+
+    if (context != null) {
+      settings = ModalRoute.of(context)?.settings;
+    } else if (state.widget.pages.isNotEmpty) {
+      settings = state.widget.pages.last;
+    }
+
+    return settings?.arguments;
+  }
+
   /// Get a route widget from a MaterialApp/CupertinoApp.
   static Widget _getRouteWidget(String name) {
     var routes = _getRoutes();
