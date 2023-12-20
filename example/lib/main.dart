@@ -122,8 +122,8 @@ class MaterialSecondPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var routeName = EasyNav.getCurrentRouteName(context);
-    var routeArgs = EasyNav.getCurrentRouteArguments(context);
+    var routeName = EasyNav.getCurrentRouteName();
+    var routeArgs = EasyNav.getCurrentRouteArguments();
 
     return Scaffold(
       appBar: AppBar(

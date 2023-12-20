@@ -49,6 +49,16 @@ class EasyNav {
     return appKey.currentContext;
   }
 
+  /// Returns BuildContext from the current focused child.
+  static BuildContext? get focusContext {
+    assert(
+      state.mounted,
+      _notConnectedNavError,
+    );
+
+    return FocusScope.of(context).focusedChild?.context;
+  }
+
   /// Returns state from the Navigator.
   static NavigatorState get state => navigatorKey.currentState!;
 
@@ -232,8 +242,8 @@ class EasyNav {
       );
 
   /// Get the current route name
-  static String getCurrentRouteName(BuildContext context) {
-    var settings = ModalRoute.of(context)?.settings;
+  static String getCurrentRouteName([BuildContext? context]) {
+    var settings = ModalRoute.of(context ?? focusContext!)?.settings;
 
     if (settings is RouteSettingsExt && settings.realName != null) {
       return settings.realName!;
@@ -243,8 +253,8 @@ class EasyNav {
   }
 
   /// Get the current route arguments
-  static dynamic getCurrentRouteArguments(BuildContext context) =>
-      ModalRoute.of(context)?.settings.arguments;
+  static dynamic getCurrentRouteArguments([BuildContext? context]) =>
+      ModalRoute.of(context ?? focusContext!)?.settings.arguments;
 
   /// Get a route widget from a MaterialApp/CupertinoApp.
   static Widget _getRouteWidget(String name) {
