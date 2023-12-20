@@ -29,6 +29,10 @@ class EasyDisplay {
   factory EasyDisplay.createFromAppContext() =>
       EasyDisplay.create(EasyNav.appContext);
 
+  /// Creates an EasyDisplay object from EasyNav's focusContext
+  factory EasyDisplay.createFromFocusContext() =>
+      EasyDisplay.create(EasyNav.focusContext);
+
   /// Creates an EasyDisplay object with or without BuildContext
   factory EasyDisplay.create([BuildContext? context]) {
     return EasyDisplay._(
