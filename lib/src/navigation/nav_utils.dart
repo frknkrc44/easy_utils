@@ -255,7 +255,7 @@ class EasyNav {
   static dynamic getCurrentRouteArguments([BuildContext? context]) =>
       getCurrentRouteSettings(context)?.arguments;
 
-  /// Get a route widget from a MaterialApp/CupertinoApp.
+  /// Get a named route widget from a MaterialApp/CupertinoApp.
   static Widget _getRouteWidget(String name) {
     var routes = _getRoutes();
 
@@ -269,8 +269,6 @@ class EasyNav {
 
   /// Get routes list from a MaterialApp/CupertinoApp.
   static Map<String, Widget Function(BuildContext)>? _getRoutes() {
-    assert(state.mounted, _notConnectedNavError);
-
     // If the MaterialApp connection found, return routes list.
     if (appKey.currentWidget is MaterialApp) {
       return (appKey.currentWidget as MaterialApp).routes;
