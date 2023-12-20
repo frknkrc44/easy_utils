@@ -19,7 +19,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: analyze-stable
+        id: analysis
         uses: flutterings/dart-package-analyzer@v1
         with:
           flutter_version: '3.16.4'
           flutter_channel: 'stable'
+
+      - name: create-output
+        env:
+          JSON_OUTPUT: ${{ steps.analysis.outputs.json_output }}
+        run: |
+          sudo apt install jq -y
+          export JSON_OUTPUT
+          bash -c ./generate_pana_summary.sh >> $GITHUB_STEP_SUMMARY
