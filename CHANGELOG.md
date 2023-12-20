@@ -1,3 +1,7 @@
+## 0.1.5
+
+* Add 'getCurrentRouteName' function to EasyNav
+
 ## 0.1.4
 
 * Add 'invisibleName' option for named routes (useful for Flutter Web)

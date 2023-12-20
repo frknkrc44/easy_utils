@@ -121,7 +121,7 @@ class MaterialSecondPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var routeSettings = ModalRoute.of(context)?.settings;
+    var routeName = EasyNav.getCurrentRouteName(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -134,9 +134,7 @@ class MaterialSecondPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text('Example second page'),
-            Text('Route name: ${routeSettings?.name}'),
-            if (routeSettings is RouteSettingsExt)
-              Text('Real route name: ${routeSettings.realName}'),
+            Text('Route name: $routeName'),
           ],
         ),
       ),

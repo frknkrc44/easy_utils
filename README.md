@@ -49,19 +49,35 @@ Add EasyNav.navigatorKey and EasyNav.appKey to your CupertinoApp instance.
 
 ### Usage
 
-Example: Push a new screen
+Example: Push a new route
 
 ```dart
 EasyNav.push(const MyScreen());
 ```
 
-Example: Push a new screen and pop others
+Example: Push a new named route with invisible name
+```dart
+EasyNav.pushNamed(
+  '/myRoute',
+  // It hides the route name from the address bar
+  // But you can access the route name by using `realName` variable
+  invisibleName: true,
+)
+```
+
+Example: Get the route name even it's invisible
+```dart
+// You need to pass the BuildContext to get `realName`
+var routeName = EasyNav.getCurrentRouteName(context);
+```
+
+Example: Push a new route and pop others
 
 ```dart
 EasyNav.replace(const MyScreen());
 ```
 
-Example: Push a new screen and pop until the first one
+Example: Push a new route and pop until the first one
 
 ```dart
 EasyNav.replaceUntil(
@@ -70,13 +86,13 @@ EasyNav.replaceUntil(
 );
 ```
 
-Example: Pop all screens until the first one
+Example: Pop all routes until the first one
 
 ```dart
 EasyNav.popUntilFirst();
 ```
 
-Example: Pop the current screen
+Example: Pop the current route
 
 ```dart
 EasyNav.pop();
