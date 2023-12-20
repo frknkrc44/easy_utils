@@ -232,16 +232,8 @@ class EasyNav {
       );
 
   /// Get the current route name
-  ///
-  /// [context] Required if you need `realName` from [RouteSettingsExt]
-  static String getCurrentRouteName([BuildContext? context]) {
-    RouteSettings? settings;
-
-    if (context != null) {
-      settings = ModalRoute.of(context)?.settings;
-    } else if (state.widget.pages.isNotEmpty) {
-      settings = state.widget.pages.last;
-    }
+  static String getCurrentRouteName(BuildContext context) {
+    var settings = ModalRoute.of(context)?.settings;
 
     if (settings is RouteSettingsExt && settings.realName != null) {
       return settings.realName!;
@@ -251,17 +243,8 @@ class EasyNav {
   }
 
   /// Get the current route arguments
-  static dynamic getCurrentRouteArguments([BuildContext? context]) {
-    RouteSettings? settings;
-
-    if (context != null) {
-      settings = ModalRoute.of(context)?.settings;
-    } else if (state.widget.pages.isNotEmpty) {
-      settings = state.widget.pages.last;
-    }
-
-    return settings?.arguments;
-  }
+  static dynamic getCurrentRouteArguments(BuildContext context) =>
+      ModalRoute.of(context)?.settings.arguments;
 
   /// Get a route widget from a MaterialApp/CupertinoApp.
   static Widget _getRouteWidget(String name) {

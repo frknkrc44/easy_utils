@@ -60,6 +60,7 @@ class MaterialHomePage extends StatelessWidget {
         '/second',
         // Default value
         routeType: PageRouteType.DEFAULT_APP,
+        arguments: 'BLABLABLA',
         invisibleName: true,
       ),
       child: Text('Open second page (App class)'),
@@ -122,6 +123,7 @@ class MaterialSecondPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var routeName = EasyNav.getCurrentRouteName(context);
+    var routeArgs = EasyNav.getCurrentRouteArguments(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -135,6 +137,7 @@ class MaterialSecondPage extends StatelessWidget {
           children: [
             Text('Example second page'),
             Text('Route name: $routeName'),
+            Text('Route args: $routeArgs'),
           ],
         ),
       ),
