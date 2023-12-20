@@ -15,27 +15,15 @@
  *   along with easy_utils.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-/// Some utilities to make your Flutter experience easier and better.
-library easy_utils;
+part of easy_utils;
 
-import 'dart:convert';
-import 'dart:math';
-import 'dart:ui';
+/// The route settings implementation for invisible routes.
+class RouteSettingsExt extends RouteSettings {
+  final String? realName;
 
-import 'src/platform/platform_utils.dart';
-
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-
-import 'package:http/http.dart' as _http;
-
-export 'src/platform/platform_utils.dart';
-
-part 'src/display/display_utils.dart';
-part 'src/navigation/nav_utils.dart';
-part 'src/navigation/custom_page_route.dart';
-part 'src/navigation/page_route_type.dart';
-part 'src/navigation/route_settings.dart';
-part 'src/network/http_utils.dart';
-part 'src/network/json_response.dart';
-part 'src/text/text_utils.dart';
+  RouteSettingsExt({
+    super.name,
+    super.arguments,
+    this.realName,
+  });
+}

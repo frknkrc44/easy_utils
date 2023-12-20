@@ -1,3 +1,7 @@
+## 0.1.4
+
+* Add 'invisibleName' option for named routes (useful for Flutter Web)
+
 ## 0.1.3
 
 * Add JSON response extension for http.Response

@@ -17,7 +17,11 @@ class MyMaterialApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: MaterialHomePage(),
+      routes: {
+        '/': (c) => MaterialHomePage(),
+        '/second': (c) => MaterialSecondPage(),
+      },
+      initialRoute: '/',
     );
   }
 }
@@ -52,9 +56,11 @@ class MaterialHomePage extends StatelessWidget {
     Text('Navigator Utils'),
     SizedBox(height: 16),
     ElevatedButton(
-      onPressed: () => EasyNav.push(
-        MaterialSecondPage(),
-        routeType: PageRouteType.DEFAULT_APP, /* Default value */
+      onPressed: () => EasyNav.pushNamed(
+        '/second',
+        // Default value
+        routeType: PageRouteType.DEFAULT_APP,
+        invisibleName: true,
       ),
       child: Text('Open second page (App class)'),
     ),
@@ -114,25 +120,28 @@ class MaterialSecondPage extends StatelessWidget {
   const MaterialSecondPage();
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          centerTitle: false,
-          title: Text('Second page'),
-          leading: IconButton(
-            onPressed: EasyNav.pop,
-            icon: Icon(Icons.arrow_back),
-          ),
+  Widget build(BuildContext context) {
+    var routeSettings = ModalRoute.of(context)?.settings;
+
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: false,
+        title: Text('Second page'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text('Example second page'),
+            Text('Route name: ${routeSettings?.name}'),
+            if (routeSettings is RouteSettingsExt)
+              Text('Real route name: ${routeSettings.realName}'),
+          ],
         ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text('Example second page'),
-            ],
-          ),
-        ),
-      );
+      ),
+    );
+  }
 }
 
 class MaterialHTTPPage extends StatefulWidget {

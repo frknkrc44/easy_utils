@@ -83,11 +83,18 @@ class EasyNav {
       state.popUntil(predicate);
 
   /// Push a route.
+  ///
+  /// [screen] The widget contains new screen layouts.<br>
+  /// [routeType] See [PageRouteType] enum for more details.<br>
+  /// [routeName] The route name (visible for Flutter Web).<br>
+  /// [arguments] The arguments you passed to the new route.<br>
+  /// [invisibleName] Make the route name invisible for the Route stack.<br>
   static Future<T?> push<T>(
     Widget screen, {
     PageRouteType? routeType,
     String? routeName,
     dynamic arguments,
+    bool invisibleName = false,
   }) {
     assert(state.mounted, _notConnectedNavError);
 
@@ -99,17 +106,25 @@ class EasyNav {
           routeType,
           routeName: routeName,
           arguments: arguments,
+          invisibleName: invisibleName,
         ),
       ),
     );
   }
 
   /// Push a route and remove other ones.
+  ///
+  /// [screen] The widget contains new screen layouts.<br>
+  /// [routeType] See [PageRouteType] enum for more details.<br>
+  /// [routeName] The route name (visible for Flutter Web).<br>
+  /// [arguments] The arguments you passed to the new route.<br>
+  /// [invisibleName] Make the route name invisible for the Route stack.<br>
   static Future<T?> replace<T>(
     Widget screen, {
     PageRouteType? routeType,
     String? routeName,
     dynamic arguments,
+    bool invisibleName = false,
   }) =>
       replaceUntil<T>(
         screen,
@@ -117,15 +132,24 @@ class EasyNav {
         routeName: routeName,
         arguments: arguments,
         predicate: (r) => false,
+        invisibleName: invisibleName,
       );
 
   /// Push a route and remove other ones until the condition returns true.
+  ///
+  /// [screen] The widget contains new screen layouts.<br>
+  /// [routeType] See [PageRouteType] enum for more details.<br>
+  /// [routeName] The route name (visible for Flutter Web).<br>
+  /// [arguments] The arguments you passed to the new route.<br>
+  /// [predicate] Pop routes until the condition returns true.<br>
+  /// [invisibleName] Make the route name invisible for the Route stack.<br>
   static Future<T?> replaceUntil<T>(
     Widget screen, {
     PageRouteType? routeType,
     String? routeName,
     dynamic arguments,
     required bool Function(Route) predicate,
+    bool invisibleName = false,
   }) {
     assert(state.mounted, _notConnectedNavError);
 
@@ -137,6 +161,7 @@ class EasyNav {
           routeType,
           routeName: routeName,
           arguments: arguments,
+          invisibleName: invisibleName,
         ),
         predicate,
       ),
@@ -144,37 +169,58 @@ class EasyNav {
   }
 
   /// Push a named route.
+  ///
+  /// [routeName] The route name (visible for Flutter Web).<br>
+  /// [routeType] See [PageRouteType] enum for more details.<br>
+  /// [arguments] The arguments you passed to the new route.<br>
+  /// [invisibleName] Make the route name invisible for the Route stack.<br>
   static Future<T?> pushNamed<T>(
     String routeName, {
     PageRouteType? routeType,
     dynamic arguments,
+    bool invisibleName = false,
   }) =>
       push<T>(
         _getRouteWidget(routeName),
         routeType: routeType,
         routeName: routeName,
         arguments: arguments,
+        invisibleName: invisibleName,
       );
 
   /// Push a named route and remove other ones.
+  ///
+  /// [routeName] The route name (visible for Flutter Web).<br>
+  /// [routeType] See [PageRouteType] enum for more details.<br>
+  /// [arguments] The arguments you passed to the new route.<br>
+  /// [invisibleName] Make the route name invisible for the Route stack.<br>
   static Future<T?> replaceNamed<T>(
     String routeName, {
     PageRouteType? routeType,
     dynamic arguments,
+    bool invisibleName = false,
   }) =>
       replaceNamedUntil<T>(
         routeName,
         routeType: routeType,
         arguments: arguments,
         predicate: (r) => false,
+        invisibleName: invisibleName,
       );
 
   /// Push a named route and remove other ones until the condition returns true.
+  ///
+  /// [routeName] The route name (visible for Flutter Web).<br>
+  /// [routeType] See [PageRouteType] enum for more details.<br>
+  /// [arguments] The arguments you passed to the new route.<br>
+  /// [predicate] Pop routes until the condition returns true.<br>
+  /// [invisibleName] Make the route name invisible for the Route stack.<br>
   static Future<T?> replaceNamedUntil<T>(
     String routeName, {
     PageRouteType? routeType,
     dynamic arguments,
     required bool Function(Route) predicate,
+    bool invisibleName = false,
   }) =>
       replaceUntil<T>(
         _getRouteWidget(routeName),
@@ -182,6 +228,7 @@ class EasyNav {
         routeName: routeName,
         arguments: arguments,
         predicate: predicate,
+        invisibleName: invisibleName,
       );
 
   /// Get a route widget from a MaterialApp/CupertinoApp.
@@ -225,6 +272,7 @@ class EasyNav {
     PageRouteType? routeType, {
     String? routeName,
     dynamic arguments,
+    bool invisibleName = false,
   }) {
     // If no custom route type defined,
     // use the overridden route type
@@ -235,17 +283,19 @@ class EasyNav {
       case PageRouteType.MATERIAL:
         return MaterialPageRoute<T>(
           builder: (_) => screen,
-          settings: RouteSettings(
-            name: routeName,
+          settings: RouteSettingsExt(
+            name: invisibleName ? null : routeName,
             arguments: arguments,
+            realName: routeName,
           ),
         );
       case PageRouteType.CUPERTINO:
         return CupertinoPageRoute<T>(
           builder: (_) => screen,
-          settings: RouteSettings(
-            name: routeName,
+          settings: RouteSettingsExt(
+            name: invisibleName ? null : routeName,
             arguments: arguments,
+            realName: routeName,
           ),
         );
       case PageRouteType.FADE:
@@ -255,6 +305,7 @@ class EasyNav {
           routeType: routeType!,
           routeName: routeName,
           arguments: arguments,
+          invisibleName: invisibleName,
         );
       case PageRouteType.DEFAULT_OS:
         // Check for the current OS is iOS/macOS or not
@@ -266,6 +317,7 @@ class EasyNav {
           type,
           routeName: routeName,
           arguments: arguments,
+          invisibleName: invisibleName,
         );
       case PageRouteType.DEFAULT_APP:
       default:
@@ -285,6 +337,7 @@ class EasyNav {
           type,
           routeName: routeName,
           arguments: arguments,
+          invisibleName: invisibleName,
         );
     }
   }

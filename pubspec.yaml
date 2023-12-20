@@ -1,6 +1,6 @@
 name: easy_utils
 description: Some utilities to make your Flutter experience easier and better.
-version: 0.1.3
+version: 0.1.4
 homepage: https://github.com/frknkrc44/easy_utils
 
 environment:
@@ -10,7 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  http: ^1.1.0
+  http: ^1.1.2
 
 dev_dependencies:
   import_sorter: ^4.6.0

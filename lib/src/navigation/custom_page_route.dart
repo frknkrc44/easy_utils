@@ -23,10 +23,12 @@ class _CustomPageRoute<T> extends PageRouteBuilder<T> {
     String? routeName,
     dynamic arguments,
     required PageRouteType routeType,
+    bool invisibleName = false,
   }) : super(
-          settings: RouteSettings(
-            name: routeName,
+          settings: RouteSettingsExt(
+            name: invisibleName ? null : routeName,
             arguments: arguments,
+            realName: routeName,
           ),
           pageBuilder: (
             context,
