@@ -15,8 +15,6 @@ MAX_TOTAL_POINTS=$(jq -r '.scores.maxPoints' $OUTPUT_FILE)
 echo "# Analysis result of "$PACKAGE_NAME" v"$PACKAGE_VERSION
 echo
 echo "Analyzed with Pana "$PANA_VERSION" (Dart v"$DART_VERSION" - Flutter v"$FLUTTER_VERSION" ("$FLUTTER_CHANNEL"))"
-
-echo "## Report details"
 echo
 echo "Granted total points: "$GRANTED_TOTAL_POINTS"/"$MAX_TOTAL_POINTS
 
