@@ -19,6 +19,7 @@ part of easy_utils;
 
 /// The route settings implementation for invisible routes.
 class RouteSettingsExt extends RouteSettings {
+  /// Route name (it's useful if the [name] declared as `null` due to `invisible: true`).
   final String? realName;
 
   RouteSettingsExt({
