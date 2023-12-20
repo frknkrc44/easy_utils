@@ -50,17 +50,18 @@ class EasyNav {
   }
 
   /// Returns BuildContext from the current focused child.
-  static BuildContext? get focusContext {
+  static BuildContext? get focusContext =>
+      FocusScope.of(context).focusedChild?.context;
+
+  /// Returns state from the Navigator.
+  static NavigatorState get state {
     assert(
-      state.mounted,
+      navigatorKey.currentState?.mounted ?? false,
       _notConnectedNavError,
     );
 
-    return FocusScope.of(context).focusedChild?.context;
+    return navigatorKey.currentState!;
   }
-
-  /// Returns state from the Navigator.
-  static NavigatorState get state => navigatorKey.currentState!;
 
   /// Returns OverlayState from the Navigator.
   static OverlayState get overlay => state.overlay!;
@@ -105,22 +106,19 @@ class EasyNav {
     String? routeName,
     dynamic arguments,
     bool invisibleName = false,
-  }) {
-    assert(state.mounted, _notConnectedNavError);
-
-    return Future.delayed(
-      Duration.zero,
-      () => state.push<T>(
-        _getPageRoute<T>(
-          screen,
-          routeType,
-          routeName: routeName,
-          arguments: arguments,
-          invisibleName: invisibleName,
+  }) =>
+      Future.delayed(
+        Duration.zero,
+        () => state.push<T>(
+          _getPageRoute<T>(
+            screen,
+            routeType,
+            routeName: routeName,
+            arguments: arguments,
+            invisibleName: invisibleName,
+          ),
         ),
-      ),
-    );
-  }
+      );
 
   /// Push a route and remove other ones.
   ///
@@ -160,23 +158,20 @@ class EasyNav {
     dynamic arguments,
     required bool Function(Route) predicate,
     bool invisibleName = false,
-  }) {
-    assert(state.mounted, _notConnectedNavError);
-
-    return Future.delayed(
-      Duration.zero,
-      () => state.pushAndRemoveUntil<T>(
-        _getPageRoute<T>(
-          screen,
-          routeType,
-          routeName: routeName,
-          arguments: arguments,
-          invisibleName: invisibleName,
+  }) =>
+      Future.delayed(
+        Duration.zero,
+        () => state.pushAndRemoveUntil<T>(
+          _getPageRoute<T>(
+            screen,
+            routeType,
+            routeName: routeName,
+            arguments: arguments,
+            invisibleName: invisibleName,
+          ),
+          predicate,
         ),
-        predicate,
-      ),
-    );
-  }
+      );
 
   /// Push a named route.
   ///
@@ -241,9 +236,13 @@ class EasyNav {
         invisibleName: invisibleName,
       );
 
+  /// Get the current route settings
+  static RouteSettings? getCurrentRouteSettings([BuildContext? context]) =>
+      ModalRoute.of(context ?? focusContext!)?.settings;
+
   /// Get the current route name
   static String getCurrentRouteName([BuildContext? context]) {
-    var settings = ModalRoute.of(context ?? focusContext!)?.settings;
+    var settings = getCurrentRouteSettings(context);
 
     if (settings is RouteSettingsExt && settings.realName != null) {
       return settings.realName!;
@@ -254,7 +253,7 @@ class EasyNav {
 
   /// Get the current route arguments
   static dynamic getCurrentRouteArguments([BuildContext? context]) =>
-      ModalRoute.of(context ?? focusContext!)?.settings.arguments;
+      getCurrentRouteSettings(context)?.arguments;
 
   /// Get a route widget from a MaterialApp/CupertinoApp.
   static Widget _getRouteWidget(String name) {
