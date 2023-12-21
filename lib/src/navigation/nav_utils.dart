@@ -35,18 +35,18 @@ class EasyNav {
   static final appKey = GlobalKey<State>();
 
   /// Returns BuildContext from the Navigator.
-  static BuildContext get context => navigatorKey.currentContext!;
+  static BuildContext get context => state.context;
 
   /// Returns BuildContext from the app state.
   ///
   /// <b>NOTE:</b> Make sure you added the appKey to the app.
-  static BuildContext? get appContext {
+  static BuildContext get appContext {
     assert(
       _isAppKeyValid,
       _notConnectedStateError,
     );
 
-    return appKey.currentContext;
+    return appKey.currentContext!;
   }
 
   /// Returns BuildContext from the current focused child.
