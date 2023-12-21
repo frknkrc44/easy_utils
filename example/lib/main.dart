@@ -44,6 +44,10 @@ class MaterialHomePage extends StatelessWidget {
                 ..._navigationUtils,
                 SizedBox(height: 16),
                 ..._httpUtils,
+                SizedBox(height: 16),
+                ..._getDisplayUtils(context),
+                SizedBox(height: 16),
+                ..._platformUtils,
               ],
             ),
           ),
@@ -105,6 +109,25 @@ class MaterialHomePage extends StatelessWidget {
         ),
       ];
 
+  List<Widget> _getDisplayUtils(BuildContext context) => [
+        Text('Display Utils'),
+        SizedBox(height: 16),
+        Text(
+            'Physical size: ${EasyDisplay.physicalWidth}x${EasyDisplay.physicalHeight}'),
+        Text('Media query size (context): ${_getMediaQuerySize(context)}'),
+        Text(
+            'Media query size (navContext): ${_getMediaQuerySize(EasyNav.context)}'),
+        Text(
+            'Media query size (appContext): ${_getMediaQuerySize(EasyNav.appContext)}'),
+        Text(
+            'Media query size (focusContext): ${_getMediaQuerySize(EasyNav.focusContext!)}'),
+      ];
+
+  String _getMediaQuerySize(BuildContext context) {
+    var mediaQuerySize = EasyDisplay.create(context).mediaQuery.size;
+    return '${mediaQuerySize.width}x${mediaQuerySize.height}';
+  }
+
   List<Widget> get _httpUtils => [
         Text('HTTP Utils'),
         SizedBox(height: 16),
@@ -112,6 +135,17 @@ class MaterialHomePage extends StatelessWidget {
           onPressed: () => EasyNav.push(MaterialHTTPPage()),
           child: Text('Open HTTP page'),
         ),
+      ];
+
+  List<Widget> get _platformUtils => [
+        Text('Platform Utils'),
+        SizedBox(height: 16),
+        Text('Apple: $isApple (iOS: $isIOS - macOS: $isMacOS)'),
+        Text('Google: $isGoogle (Android: $isAndroid - Fuchsia: $isFuchsia)'),
+        Text(
+            'Desktop: $isDesktop (Linux: $isLinux - MacOS: $isMacOS - Windows: $isWindows)'),
+        Text('Mobile: $isMobile (Android: $isAndroid - iOS: $isIOS)'),
+        Text('Web: $isWeb'),
       ];
 }
 
