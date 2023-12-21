@@ -1,3 +1,8 @@
+## 0.2.0
+
+* BREAKING CHANGE: Remove 'appKey' from EasyNav
+* Add 'appTitle' and 'appState' to EasyNav
+
 ## 0.1.5
 
 * Add 'getCurrentRouteSettings', 'getCurrentRouteName', 'getCurrentRouteArguments' and 'focusContext' functions to EasyNav

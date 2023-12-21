@@ -17,7 +17,7 @@ Just run `flutter pub add easy_utils` to add in your project.
 
 #### MaterialApp
 
-Add EasyNav.appKey and EasyNav.navigatorKey to your MaterialApp instance.
+Add EasyNav.navigatorKey to your MaterialApp instance.
 
 ```dart
   ...
@@ -25,7 +25,6 @@ Add EasyNav.appKey and EasyNav.navigatorKey to your MaterialApp instance.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      key: EasyNav.appKey,
       navigatorKey: EasyNav.navigatorKey,
 
   ...
@@ -33,7 +32,7 @@ Add EasyNav.appKey and EasyNav.navigatorKey to your MaterialApp instance.
 
 #### CupertinoApp
 
-Add EasyNav.appKey and EasyNav.navigatorKey to your CupertinoApp instance.
+Add EasyNav.navigatorKey to your CupertinoApp instance.
 
 ```dart
   ...
@@ -41,7 +40,6 @@ Add EasyNav.appKey and EasyNav.navigatorKey to your CupertinoApp instance.
   @override
   Widget build(BuildContext context) {
     return CupertinoApp(
-      key: EasyNav.appKey,
       navigatorKey: EasyNav.navigatorKey,
 
   ...

@@ -9,7 +9,6 @@ class MyMaterialApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      key: EasyNav.appKey,
       navigatorKey: EasyNav.navigatorKey,
       debugShowCheckedModeBanner: false,
       title: 'Flutter Easy Utils Demo',
@@ -26,15 +25,14 @@ class MyMaterialApp extends StatelessWidget {
   }
 }
 
-// ignore: must_be_immutable
 class MaterialHomePage extends StatelessWidget {
+  const MaterialHomePage();
+
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
           centerTitle: false,
-          title: Text(
-            (EasyNav.appKey.currentWidget as MaterialApp).title,
-          ),
+          title: Text(EasyNav.appTitle),
         ),
         body: SingleChildScrollView(
           child: Center(
@@ -52,69 +50,69 @@ class MaterialHomePage extends StatelessWidget {
         ),
       );
 
-  List<Widget> _navigationUtils = [
-    Text('Navigator Utils'),
-    SizedBox(height: 16),
-    ElevatedButton(
-      onPressed: () => EasyNav.pushNamed(
-        '/second',
-        // Default value
-        routeType: PageRouteType.DEFAULT_APP,
-        arguments: 'BLABLABLA',
-        invisibleName: true,
-      ),
-      child: Text('Open second page (App class)'),
-    ),
-    SizedBox(height: 16),
-    ElevatedButton(
-      onPressed: () => EasyNav.push(
-        MaterialSecondPage(),
-        routeType: PageRouteType.DEFAULT_OS,
-      ),
-      child: Text('Open second page (OS)'),
-    ),
-    SizedBox(height: 16),
-    ElevatedButton(
-      onPressed: () => EasyNav.push(
-        MaterialSecondPage(),
-        routeType: PageRouteType.MATERIAL,
-      ),
-      child: Text('Open second page (Material)'),
-    ),
-    SizedBox(height: 16),
-    ElevatedButton(
-      onPressed: () => EasyNav.push(
-        MaterialSecondPage(),
-        routeType: PageRouteType.CUPERTINO,
-      ),
-      child: Text('Open second page (Cupertino)'),
-    ),
-    SizedBox(height: 16),
-    ElevatedButton(
-      onPressed: () => EasyNav.push(
-        MaterialSecondPage(),
-        routeType: PageRouteType.FADE,
-      ),
-      child: Text('Open second page (Fade)'),
-    ),
-    SizedBox(height: 16),
-    ElevatedButton(
-      onPressed: () => EasyNav.push(
-        MaterialSecondPage(),
-        routeType: PageRouteType.SLIDE,
-      ),
-      child: Text('Open second page (Slide)'),
-    ),
-  ];
+  List<Widget> get _navigationUtils => [
+        Text('Navigator Utils'),
+        SizedBox(height: 16),
+        ElevatedButton(
+          onPressed: () => EasyNav.pushNamed(
+            '/second',
+            // Default value
+            routeType: PageRouteType.DEFAULT_APP,
+            arguments: 'BLABLABLA',
+            invisibleName: true,
+          ),
+          child: Text('Open second page (App class)'),
+        ),
+        SizedBox(height: 16),
+        ElevatedButton(
+          onPressed: () => EasyNav.push(
+            MaterialSecondPage(),
+            routeType: PageRouteType.DEFAULT_OS,
+          ),
+          child: Text('Open second page (OS)'),
+        ),
+        SizedBox(height: 16),
+        ElevatedButton(
+          onPressed: () => EasyNav.push(
+            MaterialSecondPage(),
+            routeType: PageRouteType.MATERIAL,
+          ),
+          child: Text('Open second page (Material)'),
+        ),
+        SizedBox(height: 16),
+        ElevatedButton(
+          onPressed: () => EasyNav.push(
+            MaterialSecondPage(),
+            routeType: PageRouteType.CUPERTINO,
+          ),
+          child: Text('Open second page (Cupertino)'),
+        ),
+        SizedBox(height: 16),
+        ElevatedButton(
+          onPressed: () => EasyNav.push(
+            MaterialSecondPage(),
+            routeType: PageRouteType.FADE,
+          ),
+          child: Text('Open second page (Fade)'),
+        ),
+        SizedBox(height: 16),
+        ElevatedButton(
+          onPressed: () => EasyNav.push(
+            MaterialSecondPage(),
+            routeType: PageRouteType.SLIDE,
+          ),
+          child: Text('Open second page (Slide)'),
+        ),
+      ];
 
-  List<Widget> _httpUtils = [
-    Text('HTTP Utils'),
-    SizedBox(height: 16),
-    ElevatedButton(
-      onPressed: () => EasyNav.push(MaterialHTTPPage()),
-      child: Text('Open HTTP page'),
-    ),
-  ];
+  List<Widget> get _httpUtils => [
+        Text('HTTP Utils'),
+        SizedBox(height: 16),
+        ElevatedButton(
+          onPressed: () => EasyNav.push(MaterialHTTPPage()),
+          child: Text('Open HTTP page'),
+        ),
+      ];
 }
 
 class MaterialSecondPage extends StatelessWidget {
