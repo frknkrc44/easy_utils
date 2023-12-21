@@ -65,8 +65,7 @@ EasyNav.pushNamed(
 
 Example: Get the current route name even it's invisible
 ```dart
-// You need to pass the BuildContext to get `realName`
-var routeName = EasyNav.getCurrentRouteName(context);
+var routeName = EasyNav.getCurrentRouteName();
 ```
 
 Example: Push a new route and pop others
