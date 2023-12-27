@@ -1,0 +1,7 @@
+name: PANA analyzer
+description: PANA analyzer implementation on Docker
+author: frknkrc44
+
+runs:
+  using: docker
+  image: Dockerfile
