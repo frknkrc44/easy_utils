@@ -20,5 +20,5 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run analyzer
-        uses: ./
+        uses: ./.github/action_files
 
