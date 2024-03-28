@@ -1,3 +1,7 @@
+## 0.2.1
+
+* Add new String extensions to TextUtils
+
 ## 0.2.0
 
 * BREAKING CHANGE: Remove 'appKey' from EasyNav

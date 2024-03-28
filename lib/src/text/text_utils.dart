@@ -86,4 +86,22 @@ extension EasyString on String {
         ? [this]
         : [substring(0, indexes[index]), substring(indexes[index] + 1)];
   }
+
+  /// Whether this string is empty when all whitespaces trimmed.
+  bool get isTrimEmpty => trim().isEmpty;
+
+  /// Whether this string is empty when leading whitespaces trimmed.
+  bool get isTrimLeftEmpty => trimLeft().isEmpty;
+
+  /// Whether this string is empty when trailing whitespaces trimmed.
+  bool get isTrimRightEmpty => trimRight().isEmpty;
+
+  /// Whether this string is not empty when all whitespaces trimmed.
+  bool get isTrimNotEmpty => !isTrimEmpty;
+
+  /// Whether this string is not empty when leading whitespaces trimmed.
+  bool get isTrimLeftNotEmpty => !isTrimLeftEmpty;
+
+  /// Whether this string is not empty when trailing whitespaces trimmed.
+  bool get isTrimRightNotEmpty => !isTrimRightEmpty;
 }

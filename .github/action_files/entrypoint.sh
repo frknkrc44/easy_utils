@@ -3,6 +3,7 @@
 export FLUTTER_ROOT=/opt/flutter
 export PUB_CACHE=/var/tmp/.pub_cache
 export PATH=$FLUTTER_ROOT/bin:$PUB_CACHE/bin:$PATH
+export CI=true
 git config --global --add safe.directory $FLUTTER_ROOT
 flutter --disable-analytics
 
