@@ -15,10 +15,10 @@
  *   along with easy_utils.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-part of easy_utils;
+part of '../../easy_utils.dart';
 
 /// The JSON response extension for the HTTP library
-extension JSONResponse on _http.Response {
+extension JSONResponse on http.Response {
   /// Converts the body content to `List` / `Map`
   dynamic get bodyJson => jsonDecode(body);
 

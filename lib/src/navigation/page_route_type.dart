@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 /*
  *  This file is part of easy_utils.
  *
@@ -15,7 +17,7 @@
  *   along with easy_utils.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-part of easy_utils;
+part of '../../easy_utils.dart';
 
 /// This enum using in the EasyNav to determine page route type
 ///

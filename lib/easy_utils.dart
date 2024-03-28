@@ -27,7 +27,7 @@ import 'src/platform/platform_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:http/http.dart' as _http;
+import 'package:http/http.dart' as http;
 
 export 'src/platform/platform_utils.dart';
 

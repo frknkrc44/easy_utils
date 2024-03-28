@@ -15,7 +15,7 @@
  *   along with easy_utils.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-part of easy_utils;
+part of '../../easy_utils.dart';
 
 /// Send a HTTP request and receive the output easily.
 /// ```dart
@@ -83,7 +83,7 @@ class EasyHttp {
   /// Get the EasyHttp instance
   static EasyHttp get instance => _instance ??= EasyHttp._();
 
-  var _client = _http.Client();
+  final _client = http.Client();
 
   /// Set a prefix to use it on your API calls.
   ///
@@ -91,7 +91,7 @@ class EasyHttp {
   String? prefix;
 
   /// Send a GET request
-  Future<_http.Response> sendGET(
+  Future<http.Response> sendGET(
     String url, {
     Map<String, String>? headers,
     int timeout = 30000,
@@ -104,7 +104,7 @@ class EasyHttp {
       );
 
   /// Send a GET request as StreamedResponse
-  Future<_http.StreamedResponse> sendGETStreamed(
+  Future<http.StreamedResponse> sendGETStreamed(
     String url, {
     Map<String, String>? headers,
     int timeout = 30000,
@@ -117,7 +117,7 @@ class EasyHttp {
       );
 
   /// Send a HEAD request
-  Future<_http.Response> sendHEAD(
+  Future<http.Response> sendHEAD(
     String url, {
     Map<String, String>? headers,
     int timeout = 30000,
@@ -130,7 +130,7 @@ class EasyHttp {
       );
 
   /// Send a HEAD request as StreamedResponse
-  Future<_http.StreamedResponse> sendHEADStreamed(
+  Future<http.StreamedResponse> sendHEADStreamed(
     String url, {
     Map<String, String>? headers,
     int timeout = 30000,
@@ -143,7 +143,7 @@ class EasyHttp {
       );
 
   /// Send a POST request
-  Future<_http.Response> sendPOST(
+  Future<http.Response> sendPOST(
     String url, {
     Map<String, String>? headers,
     Object? body,
@@ -162,7 +162,7 @@ class EasyHttp {
       );
 
   /// Send a POST request as StreamedResponse
-  Future<_http.StreamedResponse> sendPOSTStreamed(
+  Future<http.StreamedResponse> sendPOSTStreamed(
     String url, {
     Map<String, String>? headers,
     Object? body,
@@ -181,7 +181,7 @@ class EasyHttp {
       );
 
   /// Send a PUT request
-  Future<_http.Response> sendPUT(
+  Future<http.Response> sendPUT(
     String url, {
     Map<String, String>? headers,
     Object? body,
@@ -200,7 +200,7 @@ class EasyHttp {
       );
 
   /// Send a PUT request as StreamedResponse
-  Future<_http.StreamedResponse> sendPUTStreamed(
+  Future<http.StreamedResponse> sendPUTStreamed(
     String url, {
     Map<String, String>? headers,
     Object? body,
@@ -219,7 +219,7 @@ class EasyHttp {
       );
 
   /// Send a DELETE request
-  Future<_http.Response> sendDELETE(
+  Future<http.Response> sendDELETE(
     String url, {
     Map<String, String>? headers,
     Object? body,
@@ -238,7 +238,7 @@ class EasyHttp {
       );
 
   /// Send a DELETE request as StreamedResponse
-  Future<_http.StreamedResponse> sendDELETEStreamed(
+  Future<http.StreamedResponse> sendDELETEStreamed(
     String url, {
     Map<String, String>? headers,
     Object? body,
@@ -257,7 +257,7 @@ class EasyHttp {
       );
 
   /// Send a PATCH request
-  Future<_http.Response> sendPATCH(
+  Future<http.Response> sendPATCH(
     String url, {
     Map<String, String>? headers,
     Object? body,
@@ -276,7 +276,7 @@ class EasyHttp {
       );
 
   /// Send a PATCH request as StreamedResponse
-  Future<_http.StreamedResponse> sendPATCHStreamed(
+  Future<http.StreamedResponse> sendPATCHStreamed(
     String url, {
     Map<String, String>? headers,
     Object? body,
@@ -295,7 +295,7 @@ class EasyHttp {
       );
 
   /// Send a custom HTTP request (like UNLOCK)
-  Future<_http.Response> sendCUSTOM(
+  Future<http.Response> sendCUSTOM(
     String url, {
     required String method,
     Map<String, String>? headers,
@@ -316,7 +316,7 @@ class EasyHttp {
 
     var streamBytes = await streamedResponse.stream.toBytes();
 
-    return _http.Response(
+    return http.Response(
       (encoding ?? utf8).decode(streamBytes),
       streamedResponse.statusCode,
       request: streamedResponse.request,
@@ -328,7 +328,7 @@ class EasyHttp {
   }
 
   /// Send a custom HTTP request (like UNLOCK) as streamed
-  Future<_http.StreamedResponse> sendCUSTOMStreamed(
+  Future<http.StreamedResponse> sendCUSTOMStreamed(
     String url, {
     required String method,
     Map<String, String>? headers,
@@ -352,7 +352,7 @@ class EasyHttp {
       }
     }
 
-    var customRequest = _http.Request(method, Uri.parse(url));
+    var customRequest = http.Request(method, Uri.parse(url));
     customRequest.encoding = encoding ?? utf8;
 
     if (headers?.isNotEmpty ?? false) {

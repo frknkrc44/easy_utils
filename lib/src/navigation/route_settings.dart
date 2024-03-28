@@ -15,14 +15,14 @@
  *   along with easy_utils.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-part of easy_utils;
+part of '../../easy_utils.dart';
 
 /// The route settings implementation for invisible routes.
 class RouteSettingsExt extends RouteSettings {
   /// Route name (it's useful if the [name] declared as `null` due to `invisible: true`).
   final String? realName;
 
-  RouteSettingsExt({
+  const RouteSettingsExt({
     super.name,
     super.arguments,
     this.realName,

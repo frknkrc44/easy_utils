@@ -15,7 +15,7 @@
  *   along with easy_utils.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-part of easy_utils;
+part of '../../easy_utils.dart';
 
 /// Use the MediaQuery and other device/screen related features easily.
 class EasyDisplay {
