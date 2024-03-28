@@ -4,7 +4,7 @@ COPY entrypoint.sh /entrypoint.sh
 
 RUN apk update && \
     apk add jq && \
-    dart pub global activate pana && \
-    chmod +x /entrypoint.sh
+    chmod +x /entrypoint.sh && \
+    dart pub global activate pana
 
 ENTRYPOINT ["/entrypoint.sh"]
