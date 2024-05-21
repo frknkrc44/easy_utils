@@ -128,6 +128,31 @@ class EasyNav {
         ),
       );
 
+  /// Pop the current route then push a route.
+  ///
+  /// [screen] The widget contains new screen layouts.<br>
+  /// [routeType] See [PageRouteType] enum for more details.<br>
+  /// [routeName] The route name (visible for Flutter Web).<br>
+  /// [arguments] The arguments you passed to the new route.<br>
+  /// [invisibleName] Make the route name invisible for the Route stack.<br>
+  static Future<Y?> popAndPush<X, Y>(
+    Widget screen, {
+    PageRouteType? routeType,
+    String? routeName,
+    dynamic arguments,
+    X? result,
+    bool invisibleName = false,
+  }) {
+    pop<X>(result);
+    return push<Y>(
+      screen,
+      routeType: routeType,
+      routeName: routeName,
+      arguments: arguments,
+      invisibleName: invisibleName,
+    );
+  }
+
   /// Push a route and remove other ones.
   ///
   /// [screen] The widget contains new screen layouts.<br>
@@ -200,6 +225,29 @@ class EasyNav {
         arguments: arguments,
         invisibleName: invisibleName,
       );
+
+  /// Pop the current route then push a named route.
+  ///
+  /// [routeName] The route name (visible for Flutter Web).<br>
+  /// [routeType] See [PageRouteType] enum for more details.<br>
+  /// [arguments] The arguments you passed to the new route.<br>
+  /// [invisibleName] Make the route name invisible for the Route stack.<br>
+  static Future<Y?> popAndPushNamed<X, Y>(
+    String routeName, {
+    PageRouteType? routeType,
+    dynamic arguments,
+    X? result,
+    bool invisibleName = false,
+  }) {
+    pop<X>(result);
+    return push<Y>(
+      _getRouteWidget(routeName),
+      routeType: routeType,
+      routeName: routeName,
+      arguments: arguments,
+      invisibleName: invisibleName,
+    );
+  }
 
   /// Push a named route and remove other ones.
   ///

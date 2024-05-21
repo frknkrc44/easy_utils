@@ -1,3 +1,7 @@
+## 0.2.2
+
+* Add popAndPush and popAndPushNamed methods to EasyNav
+
 ## 0.2.1
 
 * Add new String extensions to TextUtils
