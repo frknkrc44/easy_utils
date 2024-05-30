@@ -1,3 +1,7 @@
+## 0.2.3
+
+* Add multipart form request to EasyHttp
+
 ## 0.2.2
 
 * Add popAndPush and popAndPushNamed methods to EasyNav

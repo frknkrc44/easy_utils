@@ -352,8 +352,15 @@ class EasyHttp {
       }
     }
 
-    var customRequest = http.Request(method, Uri.parse(url));
-    customRequest.encoding = encoding ?? utf8;
+    final multiPartRequest = sendBodyAsForm && body is Map<String, dynamic>;
+
+    var customRequest = multiPartRequest
+        ? http.MultipartRequest(method, Uri.parse(url))
+        : http.Request(method, Uri.parse(url));
+
+    if (!multiPartRequest) {
+      (customRequest as http.Request).encoding = encoding ?? utf8;
+    }
 
     if (headers?.isNotEmpty ?? false) {
       customRequest.headers.addAll(
@@ -374,22 +381,39 @@ class EasyHttp {
       );
     }
 
-    if (body != null) {
-      if (body is Map) {
-        if (sendBodyAsForm && body is Map<String, String>) {
-          // remove the content type key to prevent errors
-          if (customRequest.headers.containsKey('Content-Type')) {
-            customRequest.headers.remove('Content-Type');
-          }
+    if (multiPartRequest) {
+      final bodyMapKeys = body.keys.toList();
 
-          customRequest.bodyFields = body;
+      for (int i = 0; i < body.length; i++) {
+        final key = bodyMapKeys[i];
+        final value = body[key];
+
+        if (value is HttpFile) {
+          (customRequest as http.MultipartRequest).files.add(
+                value.asMultipartFile(key),
+              );
         } else {
-          customRequest.body = jsonEncode(body);
+          (customRequest as http.MultipartRequest).fields[key] = value;
         }
-      } else if (body is List<int>) {
-        customRequest.bodyBytes = body;
-      } else {
-        customRequest.body = body.toString();
+      }
+    } else {
+      if (body != null) {
+        if (body is Map) {
+          if (sendBodyAsForm && body is Map<String, String>) {
+            // remove the content type key to prevent errors
+            if (customRequest.headers.containsKey('Content-Type')) {
+              customRequest.headers.remove('Content-Type');
+            }
+
+            (customRequest as http.Request).bodyFields = body;
+          } else {
+            (customRequest as http.Request).body = jsonEncode(body);
+          }
+        } else if (body is List<int>) {
+          (customRequest as http.Request).bodyBytes = body;
+        } else {
+          (customRequest as http.Request).body = body.toString();
+        }
       }
     }
 
@@ -402,4 +426,38 @@ class EasyHttp {
       Duration(milliseconds: timeout),
     );
   }
+}
+
+class HttpFile {
+  final String name;
+  final Uint8List bytes;
+  final String mimeType;
+  final int length;
+
+  HttpFile({
+    required this.name,
+    required this.bytes,
+    required this.mimeType,
+    required this.length,
+  });
+
+  factory HttpFile.fromNameAndBytes(
+    String name,
+    Uint8List bytes,
+    String mimeType,
+  ) =>
+      HttpFile(
+        name: name,
+        bytes: bytes,
+        mimeType: mimeType,
+        length: bytes.length,
+      );
+
+  http.MultipartFile asMultipartFile(String field) =>
+      http.MultipartFile.fromBytes(
+        field,
+        bytes,
+        filename: name,
+        contentType: http_parser.MediaType.parse(mimeType),
+      );
 }

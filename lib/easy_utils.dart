@@ -20,6 +20,7 @@ library easy_utils;
 
 import 'dart:convert';
 import 'dart:math';
+import 'dart:typed_data';
 import 'dart:ui';
 
 import 'src/platform/platform_utils.dart';
@@ -28,6 +29,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:http_parser/http_parser.dart' as http_parser;
 
 export 'src/platform/platform_utils.dart';
 
