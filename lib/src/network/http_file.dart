@@ -4,10 +4,10 @@ part of '../../easy_utils.dart';
 ///
 /// Example:
 /// ```dart
-/// final httpFile = HttpFile.fromNameAndBytes(
-///   'file.png',
-///   file.readAsBytesSync(),
-///   'image/png',
+/// final httpFile = HttpFile(
+///   name: 'file.png',
+///   bytes: file.readAsBytesSync(),
+///   mimeType: 'image/png',
 /// );
 /// final multipart = httpFile.asMultipartFile('photo');
 /// ```
@@ -27,7 +27,7 @@ class HttpFile {
     required this.bytes,
     required this.mimeType,
   });
-  
+
   /// Export the [HttpFile] as the [http.MultipartFile].
   http.MultipartFile asMultipartFile(String field) =>
       http.MultipartFile.fromBytes(
