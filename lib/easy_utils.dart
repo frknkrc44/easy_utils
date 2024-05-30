@@ -38,6 +38,7 @@ part 'src/navigation/nav_utils.dart';
 part 'src/navigation/custom_page_route.dart';
 part 'src/navigation/page_route_type.dart';
 part 'src/navigation/route_settings.dart';
+part 'src/network/http_file.dart';
 part 'src/network/http_utils.dart';
 part 'src/network/json_response.dart';
 part 'src/text/text_utils.dart';
