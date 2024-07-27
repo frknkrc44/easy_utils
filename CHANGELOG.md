@@ -1,11 +1,8 @@
-## 0.2.4
-
-* Add HttpFile to EasyHttp
-* Upgrade dependencies
-
 ## 0.2.3
 
+* Add HttpFile to EasyHttp
 * Add multipart form request to EasyHttp
+* Upgrade dependencies
 
 ## 0.2.2
 
