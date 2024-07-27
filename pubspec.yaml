@@ -1,22 +1,20 @@
 name: easy_utils
 description: Some utilities to make your Flutter experience easier and better.
-version: 0.2.3
+version: 0.2.4
 homepage: https://github.com/frknkrc44/easy_utils
 
 environment:
   sdk: '>=3.0.6 <4.0.0'
-  flutter: ">=1.17.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  http: ^1.2.0
+  http: ^1.2.2
   http_parser: ^4.0.2
 
 dev_dependencies:
   flutter_lints: ">=3.0.2 <5.0.0"
   import_sorter: ^4.6.0
-
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
