@@ -1,3 +1,7 @@
+## 0.2.4
+
+* Fix latest SDK compatibility
+
 ## 0.2.3
 
 * Add HttpFile to EasyHttp

@@ -56,10 +56,10 @@ class EasyNav {
     var currentWidget = appState.widget;
 
     if (currentWidget is MaterialApp) {
-      return currentWidget.title;
+      return currentWidget.title ?? '';
     }
 
-    return (currentWidget as CupertinoApp).title;
+    return (currentWidget as CupertinoApp).title ?? '';
   }
 
   /// Returns BuildContext from the app state.
