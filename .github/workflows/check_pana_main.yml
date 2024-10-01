@@ -1,4 +1,4 @@
-name: Package analyzer
+name: Package analyzer (main)
 on:
   push:
     branches:
@@ -20,5 +20,5 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run analyzer
-        uses: ./.github/action_files
+        uses: ./.github/action_files/main
 
