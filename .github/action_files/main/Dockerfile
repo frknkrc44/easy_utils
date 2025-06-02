@@ -1,4 +1,4 @@
-FROM plugfox/flutter:master
+FROM plugfox/flutter:latest
 
 COPY entrypoint.sh /entrypoint.sh
 
