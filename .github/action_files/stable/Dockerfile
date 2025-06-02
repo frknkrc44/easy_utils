@@ -2,8 +2,8 @@ FROM plugfox/flutter:stable
 
 COPY entrypoint.sh /entrypoint.sh
 
-RUN apk update && \
-    apk add jq && \
+RUN apt update && \
+    apt install jq -y && \
     chmod +x /entrypoint.sh && \
     dart pub global activate pana
 
