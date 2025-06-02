@@ -22,6 +22,7 @@ class RouteSettingsExt extends RouteSettings {
   /// Route name (it's useful if the [name] declared as `null` due to `invisible: true`).
   final String? realName;
 
+  /// Data that might be useful in constructing a [Route].
   const RouteSettingsExt({
     super.name,
     super.arguments,
