@@ -11,7 +11,7 @@ chown $(id -u):$(id -g) -R $GITHUB_WORKSPACE
 ls -alh $GITHUB_WORKSPACE
 export JSON_OUTPUT=$(pana --no-warning --flutter-sdk $FLUTTER_ROOT $GITHUB_WORKSPACE --json)
 
-export SUMMARY_CREATOR=$GITHUB_WORKSPACE/generate_pana_summary.sh
+export SUMMARY_CREATOR=$GITHUB_WORKSPACE/.github/action_files/generate_pana_summary.sh
 chmod +x $SUMMARY_CREATOR
 bash -c $SUMMARY_CREATOR >> $GITHUB_STEP_SUMMARY
 
