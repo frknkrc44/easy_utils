@@ -16,12 +16,13 @@
  */
 
 /// Some utilities to make your Flutter experience easier and better.
-library easy_utils;
+library;
 
 import 'dart:convert';
 import 'dart:math';
-import 'dart:typed_data';
 import 'dart:ui';
+
+import 'package:flutter/services.dart';
 
 import 'src/platform/platform_utils.dart';
 

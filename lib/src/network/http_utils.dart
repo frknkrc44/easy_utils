@@ -316,15 +316,28 @@ class EasyHttp {
 
     var streamBytes = await streamedResponse.stream.toBytes();
 
-    return http.Response(
-      (encoding ?? utf8).decode(streamBytes),
-      streamedResponse.statusCode,
-      request: streamedResponse.request,
-      headers: streamedResponse.headers,
-      isRedirect: streamedResponse.isRedirect,
-      persistentConnection: streamedResponse.persistentConnection,
-      reasonPhrase: streamedResponse.reasonPhrase,
-    );
+    try {
+      final returnedBody = (encoding ?? utf8).decode(streamBytes);
+      return http.Response(
+        returnedBody,
+        streamedResponse.statusCode,
+        request: streamedResponse.request,
+        headers: streamedResponse.headers,
+        isRedirect: streamedResponse.isRedirect,
+        persistentConnection: streamedResponse.persistentConnection,
+        reasonPhrase: streamedResponse.reasonPhrase,
+      );
+    } catch (e) {
+      return http.Response.bytes(
+        streamBytes,
+        streamedResponse.statusCode,
+        request: streamedResponse.request,
+        headers: streamedResponse.headers,
+        isRedirect: streamedResponse.isRedirect,
+        persistentConnection: streamedResponse.persistentConnection,
+        reasonPhrase: streamedResponse.reasonPhrase,
+      );
+    }
   }
 
   /// Send a custom HTTP request (like UNLOCK) as streamed

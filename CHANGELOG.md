@@ -1,3 +1,7 @@
+## 0.2.5
+
+* Fix sendCUSTOM crash after receiving raw bytes
+
 ## 0.2.4
 
 * Fix latest SDK compatibility

@@ -26,7 +26,7 @@ class MyMaterialApp extends StatelessWidget {
 }
 
 class MaterialHomePage extends StatelessWidget {
-  const MaterialHomePage();
+  const MaterialHomePage({super.key});
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -150,7 +150,7 @@ class MaterialHomePage extends StatelessWidget {
 }
 
 class MaterialSecondPage extends StatelessWidget {
-  const MaterialSecondPage();
+  const MaterialSecondPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -178,8 +178,9 @@ class MaterialSecondPage extends StatelessWidget {
 }
 
 class MaterialHTTPPage extends StatefulWidget {
-  const MaterialHTTPPage();
+  const MaterialHTTPPage({super.key});
 
+  @override
   State<MaterialHTTPPage> createState() => _MaterialHTTPPageState();
 }
 
