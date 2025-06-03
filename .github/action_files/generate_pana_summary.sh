@@ -24,7 +24,7 @@ for i in `seq 0 $(( SECTION_LENGTH - 1 ))`
 do
     SECTION_TITLE=$(jq -r ".report.sections[$i].title" $OUTPUT_FILE)
     SECTION_POINTS=$(jq -r ".report.sections[$i].grantedPoints" $OUTPUT_FILE)
-    SECTION_MAX_POINTS=$(jq -r ".report.sections[$i].grantedPoints" $OUTPUT_FILE)
+    SECTION_MAX_POINTS=$(jq -r ".report.sections[$i].maxPoints" $OUTPUT_FILE)
     SECTION_STATUS=$(jq -r ".report.sections[$i].status" $OUTPUT_FILE)
 
     if [ $SECTION_STATUS == 'passed' ]
@@ -33,9 +33,9 @@ do
     else
         SECTION_STATUS='❌'
     fi
-
-    SECTION_SUMMARY=$(jq ".report.sections[$i].summary" $OUTPUT_FILE | sed -e 's/\[\*\]/✅/g' -e 's/\[x\]/❌/g' -e 's/\[~\]/⚠/g' -e 's/^"//g' -e 's/"$//g' -e 's/\\n/\n/g')
     
     echo "## "$SECTION_STATUS" "$SECTION_TITLE" "$SECTION_POINTS"/"$SECTION_MAX_POINTS
+
+    SECTION_SUMMARY=$(jq ".report.sections[$i].summary" $OUTPUT_FILE | sed -e 's/\[\*\]/✅/g' -e 's/\[x\]/❌/g' -e 's/\[~\]/⚠/g' -e 's/^"//g' -e 's/"$//g' -e 's/\\n/\n/g')
     printf "%s\n" "$SECTION_SUMMARY"
 done
