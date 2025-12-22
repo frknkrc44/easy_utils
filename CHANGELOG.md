@@ -1,3 +1,7 @@
+## 0.2.6
+
+* Upgrade dependencies
+
 ## 0.2.5
 
 * Fix sendCUSTOM crash after receiving raw bytes
